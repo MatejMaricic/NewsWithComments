@@ -36,6 +36,26 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ]
             );
         }
+        if (version_compare($context->getVersion(), '1.0.4') < 0) {
+            $setup->getConnection()->addColumn(
+                $setup->getTable('inchoo_comments'),
+                'news',
+                [
+                    'type'=> \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'size' => null,
+                    'unsigned' => true,
+                    'nullable' => false,
+                    'comment' => "news id"
+                ]);
+                $setup->getConnection()->addForeignKey(
+                $setup->getFkName('inchoo_comments', 'news', 'inchoo_news', 'news_id'),
+                'inchoo_comments',
+                'news',
+                'inchoo_news',
+                'news_id',
+                \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
+            );
+        }
         $setup->endSetup();
     }
 }
