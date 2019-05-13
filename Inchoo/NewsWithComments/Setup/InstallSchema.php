@@ -1,6 +1,6 @@
 <?php
 
-namespace Inchoo\NewsWithCommments\Setup;
+namespace Inchoo\NewsWithComments\Setup;
 
 use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
@@ -60,6 +60,8 @@ class InstallSchema implements InstallSchemaInterface
             \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
         );
 
+        $setup->getConnection()->createTable($news);
+
         $comments = $setup->getConnection()->newTable(
             $setup->getTable('inchoo_comments')
         )->addColumn(
@@ -99,8 +101,8 @@ class InstallSchema implements InstallSchemaInterface
             \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
         );
 
-        $setup->getConnection()->createTable($news);
         $setup->getConnection()->createTable($comments);
+
 
         $setup->endSetup();
     }
