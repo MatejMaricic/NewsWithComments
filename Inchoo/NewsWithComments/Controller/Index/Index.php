@@ -43,17 +43,19 @@ class Index extends Action
 
     public function execute()
     {
-        $news = $this->newsModelFactory->create();
-        $news->setTitle('nest');
-        $news->setContent('content');
-        $news->setAddedBy(1);
-        $this->newsRepository->save($news);
-
-        $comment = $this->commentsModelFactory->create();
-        $comment->setContent('neki komentar');
-        $comment->setAddedBy(2);
-        $comment->setForeignKey($news->getId());
-        $this->commentsRepository->save($comment);
+        $items = $this->_request->getParams();
+        var_dump($items);
+//        $news = $this->newsModelFactory->create();
+//        $news->setTitle('Test');
+//        $news->setContent('content');
+//        $news->setAddedBy(1);
+//        $this->newsRepository->save($news);
+//
+//        $comment = $this->commentsModelFactory->create();
+//        $comment->setContent('neki komentar');
+//        $comment->setAddedBy(2);
+//        $comment->setForeignKey($news->getId());
+//        $this->commentsRepository->save($comment);
 
 
     }

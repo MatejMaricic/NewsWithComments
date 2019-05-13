@@ -1,0 +1,11 @@
+<?php
+/**@var \Inchoo\NewsWithComments\Block\News $block */
+?>
+<?php $collection = $block->getNews(); ?>
+
+<?php foreach ($collection as $item): ?>
+    <a href="news/index/index/id/<?= $item->getId() ?>"><?= $block->escapeHtml($item->getTitle()); ?></a>
+<?=$block->escapeHtml($item->getContent());?>
+<?=$block->escapeHtml($item->getCreatedAt());?>
+
+<?php endforeach;?>
