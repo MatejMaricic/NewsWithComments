@@ -125,4 +125,13 @@ class Comments extends AbstractModel implements CommentsInterface
     {
         return $this->setData(self::PUBLISHED, $published);
     }
+
+    /**
+     * @param int $key
+     * @return CommentsInterface
+     */
+    public function setForeignKey($key)
+    {
+        return $this->setData(self::COMMENTS_KEY, $key);
+    }
 }

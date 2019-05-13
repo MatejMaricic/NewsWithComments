@@ -89,4 +89,10 @@ interface CommentsInterface
      */
     public function setPublished($published);
 
+    /**
+     * @param int $key
+     * @return CommentsInterface
+     */
+    public function setForeignKey($key);
+
 }
