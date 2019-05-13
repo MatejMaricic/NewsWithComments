@@ -26,6 +26,7 @@ class Index extends Action
      */
     private $commentsRepository;
 
+
     public function __construct(
         Context $context,
         \Inchoo\NewsWithComments\Api\NewsRepositoryInterface $newsRepository,
@@ -53,6 +54,7 @@ class Index extends Action
         $comment->setAddedBy(2);
         $comment->setForeignKey($news->getId());
         $this->commentsRepository->save($comment);
+
 
     }
 }
