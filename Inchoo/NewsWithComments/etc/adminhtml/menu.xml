@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Inchoo_NewsWithComments::manage_news" title="Manage News" translate="title" module="Inchoo_NewsWithComments" sortOrder="300" parent="Magento_Backend::content" resource="Inchoo_NewsWithComments::manage_news"/>
+        <add id="Inchoo_NewsWithComments::news" title="News" translate="title" module="Inchoo_NewsWithComments" sortOrder="200" parent="Inchoo_NewsWithComments::manage_news" action="news/news/index" resource="Inchoo_NewsWithComments::news"/>
+        <add id="Inchoo_NewsWithComments::comments" title="Comments" translate="title" module="Inchoo_NewsWithComments" sortOrder="300" parent="Inchoo_NewsWithComments::manage_news" action="comments/comments/index" resource="Inchoo_NewsWithComments::comments"/>
+
+    </menu>
+</config>
