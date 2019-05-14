@@ -54,9 +54,31 @@
                         <message translate="true">Delete selected items?</message>
                         <title translate="true">Delete items</title>
                     </confirm>
-                    <url path="inchoo/news/massDelete"/>
+                    <url path="news/news/delete"/>
                     <type>delete</type>
                     <label translate="true">Delete</label>
+                </settings>
+            </action>
+            <action name="publish">
+                <settings>
+                    <confirm>
+                        <message translate="true">Publish selected items?</message>
+                        <title translate="true">Publish items</title>
+                    </confirm>
+                    <url path="news/news/publish"/>
+                    <type>publish</type>
+                    <label translate="true">Publish</label>
+                </settings>
+            </action>
+            <action name="disable">
+                <settings>
+                    <confirm>
+                        <message translate="true">Disable selected items?</message>
+                        <title translate="true">Disable items</title>
+                    </confirm>
+                    <url path="news/news/disable"/>
+                    <type>disable</type>
+                    <label translate="true">Disable</label>
                 </settings>
             </action>
         </massaction>
@@ -80,6 +102,12 @@
             <settings>
                 <filter>text</filter>
                 <label translate="true">Title</label>
+            </settings>
+        </column>
+        <column name="published">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Published</label>
             </settings>
         </column>
         <actionsColumn name="actions" class="Inchoo\NewsWithComments\Ui\Component\Listing\Column\EditActions">
