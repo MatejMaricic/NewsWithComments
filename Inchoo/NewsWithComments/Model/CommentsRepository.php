@@ -33,19 +33,31 @@ class CommentsRepository implements CommentsRepositoryInterface
      * @var CollectionProcessorInterface
      */
     private $collectionProcessor;
+    /**
+     * @var \Magento\Framework\Escaper
+     */
+    private $_escaper;
+    /**
+     * @var \Magento\Customer\Model\Session
+     */
+    private $customerSession;
 
     public function __construct(
         \Inchoo\NewsWithComments\Api\Data\CommentsInterfaceFactory $commentsModelFactory,
         \Inchoo\NewsWithComments\Model\ResourceModel\Comments $commentsResource,
         \Inchoo\NewsWithComments\Model\ResourceModel\Comments\CollectionFactory $commentsCollectionFactory,
         \Inchoo\NewsWithComments\Api\Data\CommentsSearchResultsInterfaceFactory $searchResultsFactory,
-        CollectionProcessorInterface $collectionProcessor
+        CollectionProcessorInterface $collectionProcessor,
+        \Magento\Framework\Escaper $_escaper,
+        \Magento\Customer\Model\Session $customerSession
     ) {
         $this->commentsModelFactory = $commentsModelFactory;
         $this->commentsResource = $commentsResource;
         $this->commentsCollectionFactory = $commentsCollectionFactory;
         $this->searchResultsFactory = $searchResultsFactory;
         $this->collectionProcessor = $collectionProcessor;
+        $this->_escaper = $_escaper;
+        $this->customerSession = $customerSession;
     }
 
     /**
@@ -132,5 +144,20 @@ class CommentsRepository implements CommentsRepositoryInterface
             return false;
         }
         return $comment;
+    }
+
+    public function saveComment($data)
+    {
+        try {
+            $comment = $this->commentsModelFactory->create();
+            $comment->setContent($this->_escaper->escapeHtml($data['content']));
+            $comment->setAddedBy((int)$this->customerSession->getCustomerId());
+            $comment->setForeignKey((int)$data['news_id']);
+
+            $this->commentsResource->save($comment);
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+        return true;
     }
 }

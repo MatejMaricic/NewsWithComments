@@ -1,0 +1,30 @@
+<?php
+/**@var \Inchoo\NewsWithComments\Block\SingleNews $block */
+?>
+<?php $news = $block->getSingleNews(); ?>
+<?= $news->getTitle() ?>
+<br>
+<?= $news->getContent() ?>
+<br>
+<?= $news->getAddedAt() ?>
+<hr>
+<h2>Comments</h2>
+<?php foreach ($news->getComments() as $comment){
+    echo $comment->getContent();
+    echo "<br>";
+    echo $comment->getAddedAt();
+    echo "<br>";
+    echo $comment->getAuthor();
+    echo "<br>";
+}
+
+if ($block->isLoggedIn()): ?>
+    <form action="<?= $block->getSaveAction()?>" method="post">
+        <input name="content" type="text">
+        <input name="news_id" type="hidden" value="<?= $news->getId()?>">
+        <input type="submit" value="Comment">
+    </form>
+<?php else: ?>
+<h2>You must be logged in to comment</h2>
+<?php endif; ?>
+

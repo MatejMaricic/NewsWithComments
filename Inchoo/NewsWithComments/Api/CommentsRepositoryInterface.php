@@ -3,7 +3,6 @@
 namespace Inchoo\NewsWithComments\Api;
 
 use Magento\Framework\Api\SearchCriteriaInterface;
-use Inchoo\NewsWithComments\Api\Data\CommentsInterface;
 
 interface CommentsRepositoryInterface
 {
@@ -48,4 +47,6 @@ interface CommentsRepositoryInterface
      * @return mixed
      */
     public function getByForeignKey($foreignKey);
+
+    public function saveComment($comment);
 }
