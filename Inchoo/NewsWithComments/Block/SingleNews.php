@@ -32,6 +32,14 @@ class SingleNews extends Template
      * @var \Magento\Framework\Api\Search\FilterGroupBuilder
      */
     private $filterGroupBuilder;
+    /**
+     * @var \Magento\Customer\Api\CustomerRepositoryInterface
+     */
+    private $customerRepository;
+    /**
+     * @var \Magento\Customer\Model\Session
+     */
+    private $session;
 
     public function __construct(
         Template\Context $context,
@@ -41,6 +49,8 @@ class SingleNews extends Template
         FilterBuilder $filterBuilder,
         SearchCriteriaBuilder $searchCriteriaBuilder,
         \Magento\Framework\Api\Search\FilterGroupBuilder $filterGroupBuilder,
+        \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
+        \Magento\Customer\Model\Session $session,
         array $data = []
     ) {
         parent::__construct($context, $data);
@@ -50,6 +60,8 @@ class SingleNews extends Template
         $this->filterBuilder = $filterBuilder;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->filterGroupBuilder = $filterGroupBuilder;
+        $this->customerRepository = $customerRepository;
+        $this->session = $session;
     }
 
     public function searchFilters($id)
@@ -76,6 +88,22 @@ class SingleNews extends Template
         return $searchCriteria;
     }
 
+    public function isLoggedIn()
+    {
+        return $this->session->isLoggedIn();
+    }
+
+    public function getSaveAction()
+    {
+        return $this->getUrl('news/comment/save');
+    }
+
+    public function getAuthorName($id)
+    {
+        $author = $this->customerRepository->getById($id);
+        return $user =$author->getFirstname() . " " . $author->getLastname();
+    }
+
     public function getSingleNews()
     {
         $newsId = $this->_request->getParam('id');
@@ -84,6 +112,11 @@ class SingleNews extends Template
         $news = $this->newsRepository->getById($newsId);
 
         $comments = $this->commentsRepository->getList($searchCriteria);
+
+        foreach ($comments->getItems() as $comment) {
+            $comment->setAuthor($this->getAuthorName($comment->getAddedBy()));
+        }
+
         $news->setComments($comments->getItems());
 
         return $news;
