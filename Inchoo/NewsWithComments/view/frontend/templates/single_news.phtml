@@ -19,8 +19,8 @@
 }
 
 if ($block->isLoggedIn()): ?>
-    <form action="<?= $block->getSaveAction()?>" method="post">
-        <input name="content" type="text">
+    <form action="<?= $block->getSaveAction()?>" method="post" data-mage-init='{"validation":{}}'>
+        <input name="content" type="text" data-validate='{"required":true}'>
         <input name="news_id" type="hidden" value="<?= $news->getId()?>">
         <input type="submit" value="Comment">
     </form>
