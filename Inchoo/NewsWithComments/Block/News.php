@@ -22,6 +22,11 @@ class News extends Template
         $this->newsCollectionFactory = $newsCollectionFactory;
     }
 
+    public function getSingleNewsUrl($id)
+    {
+        return $this->getUrl('news/index/index/id/', ["id"=>$id]);
+    }
+
     public function getNews()
     {
         $collection = $this->newsCollectionFactory->create();

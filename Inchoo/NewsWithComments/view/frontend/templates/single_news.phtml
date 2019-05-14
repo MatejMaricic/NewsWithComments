@@ -1,0 +1,17 @@
+<?php
+/**@var \Inchoo\NewsWithComments\Block\SingleNews $block */
+?>
+<?php $news = $block->getSingleNews(); ?>
+<?= $news->getTitle() ?>
+<br>
+<?= $news->getContent() ?>
+<br>
+<?= $news->getAddedAt() ?>
+<hr>
+<h2>Comments</h2>
+<?php foreach ($news->getComments() as $comment){
+    echo $comment->getContent();
+    echo "<br>";
+    echo $comment->getAddedAt();
+    echo "<br>";
+}
