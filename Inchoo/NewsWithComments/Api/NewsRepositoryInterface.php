@@ -41,4 +41,6 @@ interface NewsRepositoryInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getList(SearchCriteriaInterface $searchCriteria);
+
+    public function updateNews($data);
 }

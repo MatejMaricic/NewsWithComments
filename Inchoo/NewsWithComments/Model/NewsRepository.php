@@ -119,4 +119,25 @@ class NewsRepository implements NewsRepositoryInterface
         $searchResults->setTotalCount($collection->getSize());
         return $searchResults;
     }
+
+    public function updateNews($data)
+    {
+        if ($data['news_id']) {
+            try {
+                $new = $this->getById($data['news_id']);
+                $new->setTitle($data['title']);
+                $new->setContent($data['content']);
+                $this->save($new);
+            } catch (\Exception $exception) {
+                return $exception->getMessage();
+            }
+        } else {
+            $news = $this->newsModelFactory->create();
+            $news->setAddedBy($data['admin_id']);
+            $news->setTitle($data['title']);
+            $news->setContent($data['content']);
+            $this->save($news);
+        }
+        return true;
+    }
 }

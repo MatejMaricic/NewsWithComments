@@ -23,7 +23,7 @@ class EditActions extends Column
                 $item[$this->getData('name')] = [
                     'edit' => [
                         'href' => $this->context->getUrl(
-                            'sample06/news/edit',
+                            'news/news/edit',
                             ['news_id' => $item['news_id']]
                         ),
                         'label' => __('Edit')
