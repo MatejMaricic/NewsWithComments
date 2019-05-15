@@ -17,24 +17,30 @@ class Save extends Action
     private $commentsRepository;
 
     private $resultPageFactory;
+    /**
+     * @var \Magento\Framework\App\Request\Http
+     */
+    private $request;
 
     public function __construct(
         Context $context,
 
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         \Inchoo\NewsWithComments\Api\Data\CommentsInterfaceFactory $commentsInterfaceFactory,
-        \Inchoo\NewsWithComments\Api\CommentsRepositoryInterface $commentsRepository
+        \Inchoo\NewsWithComments\Api\CommentsRepositoryInterface $commentsRepository,
+        \Magento\Framework\App\Request\Http $request
     ) {
         parent::__construct($context);
 
         $this->resultPageFactory = $resultPageFactory;
         $this->commentsInterfaceFactory = $commentsInterfaceFactory;
         $this->commentsRepository = $commentsRepository;
+        $this->request = $request;
     }
 
     public function execute()
     {
-        $params = $this->_request->getParams();
+        $params = $this->request->getPost();
         if ($params['content']) {
             $status = $this->commentsRepository->saveComment($params);
             if ($status === true) {

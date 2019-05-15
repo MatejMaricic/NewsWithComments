@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">inchoo_comments_listing.inchoo_comments_listing_data_source</item>
+        </item>
+    </argument>
+
+    <settings>
+        <spinner>inchoo_comments_columns</spinner>
+        <deps>
+            <dep>inchoo_comments_listing.inchoo_comments_listing_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="inchoo_comments_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">comment_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Inchoo_NewsWithComments::comments</aclResource>
+        <dataProvider class="\Inchoo\NewsWithComments\Ui\Component\Listing\CommentsDataProvider" name="inchoo_comments_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>comment_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>false</sticky>
+        </settings>
+
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+
+        <paging name="listing_paging"/>
+        <massaction name="listing_massaction"
+                    component="Magento_Ui/js/grid/tree-massactions">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Delete selected items?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="news/comments/delete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+            <action name="publish">
+                <settings>
+                    <confirm>
+                        <message translate="true">Publish selected items?</message>
+                        <title translate="true">Publish items</title>
+                    </confirm>
+                    <url path="news/comments/publish"/>
+                    <type>publish</type>
+                    <label translate="true">Publish</label>
+                </settings>
+            </action>
+            <action name="disable">
+                <settings>
+                    <confirm>
+                        <message translate="true">Disable selected items?</message>
+                        <title translate="true">Disable items</title>
+                    </confirm>
+                    <url path="news/comments/disable"/>
+                    <type>disable</type>
+                    <label translate="true">Disable</label>
+                </settings>
+            </action>
+        </massaction>
+
+    </listingToolbar>
+
+    <columns name="inchoo_comments_columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>comment_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="comment_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="comment_content">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Content</label>
+            </settings>
+        </column>
+        <column name="comment_added_at">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Added At</label>
+            </settings>
+        </column>
+        <column name="comment_added_by">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Added By</label>
+            </settings>
+        </column>
+        <column name="comments_published">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Published</label>
+            </settings>
+        </column>
+    </columns>
+</listing>
