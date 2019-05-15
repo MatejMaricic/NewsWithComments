@@ -5,5 +5,8 @@
         <route id="news" frontName="news">
             <module name="Inchoo_NewsWithComments" before="Magento_Backend" />
         </route>
+        <route id="comments" frontName="comments">
+            <module name="Inchoo_NewsWithComments" before="Magento_Backend" />
+        </route>
     </router>
 </config>

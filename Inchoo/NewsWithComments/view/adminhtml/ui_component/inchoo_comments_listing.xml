@@ -3,36 +3,29 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">inchoo_news_listing.inchoo_news_listing_data_source</item>
+            <item name="provider" xsi:type="string">inchoo_comments_listing.inchoo_comments_listing_data_source</item>
         </item>
     </argument>
 
     <settings>
-        <buttons>
-            <button name="add">
-                <url path="*/*/new"/>
-                <class>primary</class>
-                <label translate="true">Add New</label>
-            </button>
-        </buttons>
-        <spinner>inchoo_news_columns</spinner>
+        <spinner>inchoo_comments_columns</spinner>
         <deps>
-            <dep>inchoo_news_listing.inchoo_news_listing_data_source</dep>
+            <dep>inchoo_comments_listing.inchoo_comments_listing_data_source</dep>
         </deps>
     </settings>
 
-    <dataSource name="inchoo_news_listing_data_source" component="Magento_Ui/js/grid/provider">
+    <dataSource name="inchoo_comments_listing_data_source" component="Magento_Ui/js/grid/provider">
         <settings>
             <storageConfig>
-                <param name="indexField" xsi:type="string">news_id</param>
+                <param name="indexField" xsi:type="string">comment_id</param>
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <aclResource>Inchoo_NewsWithComments::news</aclResource>
-        <dataProvider class="Inchoo\NewsWithComments\Ui\Component\Listing\NewsDataProvider" name="inchoo_news_listing_data_source">
+        <aclResource>Inchoo_NewsWithComments::comments</aclResource>
+        <dataProvider class="\Inchoo\NewsWithComments\Ui\Component\Listing\CommentsDataProvider" name="inchoo_comments_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
-                <primaryFieldName>news_id</primaryFieldName>
+                <primaryFieldName>comment_id</primaryFieldName>
             </settings>
         </dataProvider>
     </dataSource>
@@ -54,7 +47,7 @@
                         <message translate="true">Delete selected items?</message>
                         <title translate="true">Delete items</title>
                     </confirm>
-                    <url path="news/news/delete"/>
+                    <url path="news/comments/delete"/>
                     <type>delete</type>
                     <label translate="true">Delete</label>
                 </settings>
@@ -65,7 +58,7 @@
                         <message translate="true">Publish selected items?</message>
                         <title translate="true">Publish items</title>
                     </confirm>
-                    <url path="news/news/publish"/>
+                    <url path="news/comments/publish"/>
                     <type>publish</type>
                     <label translate="true">Publish</label>
                 </settings>
@@ -76,7 +69,7 @@
                         <message translate="true">Disable selected items?</message>
                         <title translate="true">Disable items</title>
                     </confirm>
-                    <url path="news/news/disable"/>
+                    <url path="news/comments/disable"/>
                     <type>disable</type>
                     <label translate="true">Disable</label>
                 </settings>
@@ -85,41 +78,42 @@
 
     </listingToolbar>
 
-    <columns name="inchoo_news_columns">
+    <columns name="inchoo_comments_columns">
         <selectionsColumn name="ids">
             <settings>
-                <indexField>news_id</indexField>
+                <indexField>comment_id</indexField>
             </settings>
         </selectionsColumn>
-        <column name="news_id">
+        <column name="comment_id">
             <settings>
                 <filter>textRange</filter>
                 <label translate="true">ID</label>
                 <sorting>desc</sorting>
             </settings>
         </column>
-        <column name="title">
+        <column name="comment_content">
             <settings>
                 <filter>text</filter>
-                <label translate="true">Title</label>
+                <label translate="true">Content</label>
             </settings>
         </column>
-        <column name="published">
+        <column name="comment_added_at">
             <settings>
                 <filter>text</filter>
-                <label translate="true">Published</label>
+                <label translate="true">Added At</label>
             </settings>
         </column>
-        <column name="added_by">
+        <column name="comment_added_by">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Added By</label>
             </settings>
         </column>
-        <actionsColumn name="actions" class="Inchoo\NewsWithComments\Ui\Component\Listing\Column\EditActions">
+        <column name="comments_published">
             <settings>
-                <indexField>news_id</indexField>
+                <filter>text</filter>
+                <label translate="true">Published</label>
             </settings>
-        </actionsColumn>
+        </column>
     </columns>
 </listing>

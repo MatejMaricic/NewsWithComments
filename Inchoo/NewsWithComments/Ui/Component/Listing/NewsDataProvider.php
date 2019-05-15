@@ -4,8 +4,17 @@ namespace Inchoo\NewsWithComments\Ui\Component\Listing;
 
 use Magento\Ui\DataProvider\AbstractDataProvider;
 
-class DataProvider extends AbstractDataProvider
+class NewsDataProvider extends AbstractDataProvider
 {
+    /**
+     * @var \Magento\User\Model\UserFactory
+     */
+    private $userFactory;
+    /**
+     * @var \Magento\User\Model\ResourceModel\User
+     */
+    private $userResource;
+
     /**
      * @param string $name
      * @param string $primaryFieldName
@@ -19,12 +28,23 @@ class DataProvider extends AbstractDataProvider
         $primaryFieldName,
         $requestFieldName,
         \Inchoo\NewsWithComments\Model\ResourceModel\News\CollectionFactory $collectionFactory,
+        \Magento\User\Model\UserFactory $userFactory,
+        \Magento\User\Model\ResourceModel\User $userResource,
         array $meta = [],
         array $data = []
     ) {
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
 
         $this->collection = $collectionFactory->create();
+        $this->userFactory = $userFactory;
+        $this->userResource = $userResource;
+    }
+
+    public function getAdminName($id)
+    {
+        $admin = $this->userFactory->create();
+        $this->userResource->load($admin, (int)$id);
+        return ucfirst($admin->getFirstName()) . ' ' . ucfirst($admin->getLastName());
     }
 
     /**

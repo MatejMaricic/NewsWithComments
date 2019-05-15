@@ -47,4 +47,6 @@ interface NewsRepositoryInterface
     public function disableNews($id);
 
     public function publishNews($id);
+
+    public function deleteNews($id);
 }

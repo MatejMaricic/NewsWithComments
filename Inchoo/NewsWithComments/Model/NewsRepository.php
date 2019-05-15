@@ -168,4 +168,17 @@ class NewsRepository implements NewsRepositoryInterface
         }
         return "News Published";
     }
+
+    public function deleteNews($id)
+    {
+        try {
+            foreach ($id as $singleId) {
+                $news = $this->getById($singleId);
+                $this->delete($news);
+            }
+        } catch (\Exception $exception) {
+            return "Could not delete selected news";
+        }
+        return "News Deleted";
+    }
 }
