@@ -49,4 +49,10 @@ interface CommentsRepositoryInterface
     public function getByForeignKey($foreignKey);
 
     public function saveComment($comment);
+
+    public function disableComments($id);
+
+    public function publishComments($id);
+
+    public function deleteComments($id);
 }

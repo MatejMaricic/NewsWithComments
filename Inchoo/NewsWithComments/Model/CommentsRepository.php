@@ -160,4 +160,46 @@ class CommentsRepository implements CommentsRepositoryInterface
         }
         return true;
     }
+
+    public function disableComments($id)
+    {
+        try {
+            foreach ($id as $singleId) {
+                $comments = $this->getById($singleId);
+                $comments->setPublished(false);
+                $this->save($comments);
+            }
+        } catch (\Exception $exception) {
+            return "Could not disable selected comments";
+        }
+        return "Comments Disabled";
+    }
+
+    public function publishComments($id)
+    {
+        try {
+            foreach ($id as $singleId) {
+                $comments = $this->getById($singleId);
+                $comments->setPublished(true);
+                $this->save($comments);
+            }
+        } catch (\Exception $exception) {
+            return "Could not publish selected comments";
+        }
+        return "Comments Published";
+    }
+
+    public function deleteComments($id)
+    {
+        try {
+            foreach ($id as $singleId) {
+                $comments = $this->getById($singleId);
+                $this->delete($comments);
+            }
+        } catch (\Exception $exception) {
+            return "Could not delete selected comments";
+        }
+        return "Comments Deleted";
+
+    }
 }
