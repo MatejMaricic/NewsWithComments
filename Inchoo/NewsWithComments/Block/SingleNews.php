@@ -40,6 +40,10 @@ class SingleNews extends Template
      * @var \Magento\Customer\Model\Session
      */
     private $session;
+    /**
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    private $scopeConfig;
 
     public function __construct(
         Template\Context $context,
@@ -51,6 +55,7 @@ class SingleNews extends Template
         \Magento\Framework\Api\Search\FilterGroupBuilder $filterGroupBuilder,
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
         \Magento\Customer\Model\Session $session,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         array $data = []
     ) {
         parent::__construct($context, $data);
@@ -62,6 +67,7 @@ class SingleNews extends Template
         $this->filterGroupBuilder = $filterGroupBuilder;
         $this->customerRepository = $customerRepository;
         $this->session = $session;
+        $this->scopeConfig = $scopeConfig;
     }
 
     public function searchFilters($id)
@@ -86,6 +92,11 @@ class SingleNews extends Template
         $searchCriteria->setFilterGroups([$filterGroup, $filterGroup1]);
 
         return $searchCriteria;
+    }
+    public function getConfig()
+    {
+        $config = $this->scopeConfig->getValue('newswithcomments/general/enable');
+        return $config;
     }
 
     public function isLoggedIn()

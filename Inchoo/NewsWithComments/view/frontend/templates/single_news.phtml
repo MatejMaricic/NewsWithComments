@@ -8,8 +8,9 @@
 <br>
 <?= $news->getAddedAt() ?>
 <hr>
+<?php if ($block->getConfig() === '1'): ?>
 <h2>Comments</h2>
-<?php foreach ($news->getComments() as $comment){
+<?php foreach ($news->getComments() as $comment) {
     echo $comment->getContent();
     echo "<br>";
     echo $comment->getAddedAt();
@@ -26,5 +27,6 @@ if ($block->isLoggedIn()): ?>
     </form>
 <?php else: ?>
 <h2>You must be logged in to comment</h2>
+<?php endif; ?>
 <?php endif; ?>
 
