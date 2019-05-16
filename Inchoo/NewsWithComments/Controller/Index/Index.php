@@ -29,7 +29,6 @@ class Index extends Action
             $resultPage = $this->resultPageFactory->create();
             return $resultPage;
         }
-        $this->messageManager->addSuccessMessage('asdas');
         return $this->_redirect('/');
     }
 }

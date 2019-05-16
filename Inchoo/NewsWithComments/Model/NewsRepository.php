@@ -127,6 +127,7 @@ class NewsRepository implements NewsRepositoryInterface
                 $new = $this->getById($data['news_id']);
                 $new->setTitle($data['title']);
                 $new->setContent($data['content']);
+                $new->setStoreView($data['store_view']);
                 $this->save($new);
             } catch (\Exception $exception) {
                 return $exception->getMessage();
@@ -136,6 +137,7 @@ class NewsRepository implements NewsRepositoryInterface
             $news->setAddedBy($data['admin_id']);
             $news->setTitle($data['title']);
             $news->setContent($data['content']);
+            $news->setStoreView($data['store_view']);
             $this->save($news);
         }
         return true;
