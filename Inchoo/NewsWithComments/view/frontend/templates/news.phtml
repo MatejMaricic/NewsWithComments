@@ -3,14 +3,24 @@
 ?>
 <?php $news = $block->getNews(); ?>
 
-<?php foreach ($news as $item): ?>
-    <a href="<?= $block->getSingleNewsUrl($item->getId()); ?>">
-        <?= $block->escapeHtml($item->getTitle()); ?>
-    </a>
-<br>
-<?=$block->escapeHtml($item->getContent());?>
-<br>
-<?=$block->escapeHtml($item->getCreatedAt());?>
-<hr>
-
-<?php endforeach;?>
+<div class="container">
+    <div class="widget block block-static-block">
+        <?php foreach ($news as $item): ?>
+            <div>
+                <h3 class="product name product-item-name">
+                    <a href="<?= $block->getSingleNewsUrl($item->getId()); ?>">
+                        <?= $block->escapeHtml($item->getTitle()); ?>
+                    </a>
+                </h3>
+                <br>
+                <p>
+                    <?=$block->escapeHtml($item->getContent());?>
+                </p>
+                <p class="item product">
+                    <?=$block->escapeHtml($item->getAddedAt())|date('Y-m-d');?>
+                </p>
+                <hr>
+            </div>
+        <?php endforeach;?>
+    </div>
+</div>

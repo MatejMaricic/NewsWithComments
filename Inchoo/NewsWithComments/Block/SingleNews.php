@@ -42,6 +42,10 @@ class SingleNews extends Template
      * @var SortOrderBuilder
      */
     private $sortOrderBuilder;
+    /**
+     * @var \Magento\Framework\App\Response\RedirectInterface
+     */
+    private $redirect;
 
     public function __construct(
         Template\Context $context,
@@ -53,6 +57,7 @@ class SingleNews extends Template
         \Magento\Customer\Model\Session $session,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         SortOrderBuilder $sortOrderBuilder,
+        \Magento\Framework\App\Response\RedirectInterface $redirect,
         array $data = []
     ) {
         parent::__construct($context, $data);
@@ -64,6 +69,7 @@ class SingleNews extends Template
         $this->session = $session;
         $this->scopeConfig = $scopeConfig;
         $this->sortOrderBuilder = $sortOrderBuilder;
+        $this->redirect = $redirect;
     }
 
     public function searchFilters($id)
@@ -78,6 +84,7 @@ class SingleNews extends Template
         $searchCriteria = $this->searchCriteriaBuilder->create();
         return $searchCriteria;
     }
+
     public function getConfig()
     {
         $config = $this->scopeConfig->getValue('newswithcomments/general/enable');
@@ -92,6 +99,12 @@ class SingleNews extends Template
     public function getSaveAction()
     {
         return $this->getUrl('news/comment/save');
+    }
+
+    public function getLoginUrl()
+    {
+        $url = $this->redirect->getRefererUrl();
+        return $this->getUrl('customer/account/login', ['referer' => base64_encode($url)]);
     }
 
     public function getAuthorName($id)
