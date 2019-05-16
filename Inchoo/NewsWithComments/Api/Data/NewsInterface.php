@@ -13,6 +13,7 @@ interface NewsInterface
     const ADDED_AT      = 'added_at';
     const ADDED_BY      = 'added_by';
     const PUBLISHED     = 'published';
+    const STORE_VIEW    = 'store_view';
     /**#@-*/
 
     /**
@@ -55,6 +56,11 @@ interface NewsInterface
      * @return bool
      */
     public function getPublished();
+
+    /**
+     * @return mixed
+     */
+    public function getStoreView();
 
     /**
      * Set ID
@@ -100,4 +106,10 @@ interface NewsInterface
      * @return NewsInterface
      */
     public function setPublished($published);
+
+    /**
+     * @param $storeView
+     * @return NewsInterface
+     */
+    public function setStoreView($storeView);
 }

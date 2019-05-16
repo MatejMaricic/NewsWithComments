@@ -46,13 +46,35 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'unsigned' => true,
                     'nullable' => false,
                     'comment' => "news id"
-                ]);
-                $setup->getConnection()->addForeignKey(
+                ]
+            );
+            $setup->getConnection()->addForeignKey(
                 $setup->getFkName('inchoo_comments', 'news', 'inchoo_news', 'news_id'),
                 'inchoo_comments',
                 'news',
                 'inchoo_news',
                 'news_id',
+                \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
+            );
+        }
+        if (version_compare($context->getVersion(), '1.0.6') < 0) {
+            $setup->getConnection()->addColumn(
+                $setup->getTable('inchoo_news'),
+                'store_view',
+                [
+                    'type'=> \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                    'size' => null,
+                    'unsigned' => true,
+                    'nullable' => false,
+                    'comment' => "Store View id"
+                ]
+            );
+            $setup->getConnection()->addForeignKey(
+                $setup->getFkName('inchoo_news', 'store_view', 'store', 'store_id'),
+                'inchoo_news',
+                'store_view',
+                $setup->getTable('store'),
+                'store_id',
                 \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
             );
         }

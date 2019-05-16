@@ -1,9 +1,9 @@
 <?php
 /**@var \Inchoo\NewsWithComments\Block\News $block */
 ?>
-<?php $collection = $block->getNews(); ?>
+<?php $news = $block->getNews(); ?>
 
-<?php foreach ($collection as $item): ?>
+<?php foreach ($news as $item): ?>
     <a href="<?= $block->getSingleNewsUrl($item->getId()); ?>">
         <?= $block->escapeHtml($item->getTitle()); ?>
     </a>

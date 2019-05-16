@@ -136,4 +136,21 @@ class News extends AbstractModel implements NewsInterface
     {
         return $this->setData(self::PUBLISHED, $published);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getStoreView()
+    {
+        return $this->getData(self::STORE_VIEW);
+    }
+
+    /**
+     * @param $storeView
+     * @return NewsInterface
+     */
+    public function setStoreView($storeView)
+    {
+        return $this->setData(self::STORE_VIEW, $storeView);
+    }
 }
