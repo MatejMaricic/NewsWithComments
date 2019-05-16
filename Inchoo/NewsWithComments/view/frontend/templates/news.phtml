@@ -1,0 +1,16 @@
+<?php
+/**@var \Inchoo\NewsWithComments\Block\News $block */
+?>
+<?php $news = $block->getNews(); ?>
+
+<?php foreach ($news as $item): ?>
+    <a href="<?= $block->getSingleNewsUrl($item->getId()); ?>">
+        <?= $block->escapeHtml($item->getTitle()); ?>
+    </a>
+<br>
+<?=$block->escapeHtml($item->getContent());?>
+<br>
+<?=$block->escapeHtml($item->getCreatedAt());?>
+<hr>
+
+<?php endforeach;?>

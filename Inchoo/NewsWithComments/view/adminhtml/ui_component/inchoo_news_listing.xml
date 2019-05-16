@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">inchoo_news_listing.inchoo_news_listing_data_source</item>
+        </item>
+    </argument>
+
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">Add New</label>
+            </button>
+        </buttons>
+        <spinner>inchoo_news_columns</spinner>
+        <deps>
+            <dep>inchoo_news_listing.inchoo_news_listing_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="inchoo_news_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">news_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Inchoo_NewsWithComments::news</aclResource>
+        <dataProvider class="Inchoo\NewsWithComments\Ui\Component\Listing\NewsDataProvider" name="inchoo_news_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>news_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>false</sticky>
+        </settings>
+
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+
+        <paging name="listing_paging"/>
+        <massaction name="listing_massaction"
+                    component="Magento_Ui/js/grid/tree-massactions">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Delete selected items?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="news/news/delete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+            <action name="publish">
+                <settings>
+                    <confirm>
+                        <message translate="true">Publish selected items?</message>
+                        <title translate="true">Publish items</title>
+                    </confirm>
+                    <url path="news/news/publish"/>
+                    <type>publish</type>
+                    <label translate="true">Publish</label>
+                </settings>
+            </action>
+            <action name="disable">
+                <settings>
+                    <confirm>
+                        <message translate="true">Disable selected items?</message>
+                        <title translate="true">Disable items</title>
+                    </confirm>
+                    <url path="news/news/disable"/>
+                    <type>disable</type>
+                    <label translate="true">Disable</label>
+                </settings>
+            </action>
+        </massaction>
+
+    </listingToolbar>
+
+    <columns name="inchoo_news_columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>news_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="news_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="title">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Title</label>
+            </settings>
+        </column>
+        <column name="published">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Published</label>
+            </settings>
+        </column>
+        <column name="added_by">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Added By</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Inchoo\NewsWithComments\Ui\Component\Listing\Column\EditActions">
+            <settings>
+                <indexField>news_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>
