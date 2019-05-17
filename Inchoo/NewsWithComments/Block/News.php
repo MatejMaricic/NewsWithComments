@@ -59,6 +59,11 @@ class News extends Template
         return $this->getUrl('news/index/index/id/', ["id"=>$id]);
     }
 
+    public function getAllNewsUrl()
+    {
+        return $this->getUrl('news/index/view');
+    }
+
     public function getSearchCriteria()
     {
         $sortOrder = $this->sortOrder->create();

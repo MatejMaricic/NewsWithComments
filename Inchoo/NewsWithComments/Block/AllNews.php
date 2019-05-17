@@ -49,6 +49,8 @@ class AllNews extends Template
         $collection = $this->newsCollectionFactory->create();
         $collection->setPageSize($pageSize);
         $collection->setCurPage($page);
+        $collection->addFieldToFilter('published', '1');
+        $collection->addFieldToFilter('store_view', 1);
         return $collection;
     }
 }
