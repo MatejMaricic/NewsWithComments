@@ -14,7 +14,7 @@ interface NewsSearchResultsInterface
     /**
      * Set news list.
      *
-     * @param \Inchoo\NewsWithComments\Api\Data\NewsInterface[] $items
+     * @param  \Inchoo\NewsWithComments\Api\Data\NewsInterface[] $items
      * @return $this
      */
     public function setItems(array $items);

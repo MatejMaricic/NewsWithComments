@@ -3,6 +3,7 @@
 namespace Inchoo\NewsWithComments\Model;
 
 use Inchoo\NewsWithComments\Api\Data;
+use Inchoo\NewsWithComments\Api\Data\NewsInterface;
 use Inchoo\NewsWithComments\Api\NewsRepositoryInterface;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
@@ -51,7 +52,7 @@ class NewsRepository implements NewsRepositoryInterface
     /**
      * Retrieve news.
      *
-     * @param int $newsId
+     * @param  int $newsId
      * @return \Inchoo\NewsWithComments\Api\Data\NewsInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -68,7 +69,7 @@ class NewsRepository implements NewsRepositoryInterface
     /**
      * Save news.
      *
-     * @param \Inchoo\NewsWithComments\Api\Data\NewsInterface $news
+     * @param  \Inchoo\NewsWithComments\Api\Data\NewsInterface $news
      * @return \Inchoo\NewsWithComments\Api\Data\NewsInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -85,7 +86,7 @@ class NewsRepository implements NewsRepositoryInterface
     /**
      * Delete news.
      *
-     * @param \Inchoo\NewsWithComments\Api\Data\NewsInterface $news
+     * @param  \Inchoo\NewsWithComments\Api\Data\NewsInterface $news
      * @return bool true on success
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -101,18 +102,22 @@ class NewsRepository implements NewsRepositoryInterface
     /**
      * Retrieve news matching the specified search criteria.
      *
-     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+     * @param  \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
      * @return \Inchoo\NewsWithComments\Api\Data\NewsSearchResultsInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getList(SearchCriteriaInterface $searchCriteria)
     {
-        /** @var \Inchoo\NewsWithComments\Model\ResourceModel\News\Collection $collection */
+        /**
+ * @var \Inchoo\NewsWithComments\Model\ResourceModel\News\Collection $collection 
+*/
         $collection = $this->newsCollectionFactory->create();
 
         $this->collectionProcessor->process($searchCriteria, $collection);
 
-        /** @var Data\NewsSearchResultsInterface $searchResults */
+        /**
+ * @var Data\NewsSearchResultsInterface $searchResults 
+*/
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($searchCriteria);
         $searchResults->setItems($collection->getItems());
@@ -124,10 +129,10 @@ class NewsRepository implements NewsRepositoryInterface
     {
         if ($data['news_id']) {
             try {
-                $new = $this->getById($data['news_id']);
-                $new->setTitle($data['title']);
-                $new->setContent($data['content']);
-                $new->setStoreView($data['store_view']);
+                $new = $this->getById($data[NewsInterface::NEWS_ID]);
+                $new->setTitle($data[NewsInterface::TITLE]);
+                $new->setContent($data[NewsInterface::CONTENT]);
+                $new->setStoreView($data[NewsInterface::STORE_VIEW]);
                 $this->save($new);
             } catch (\Exception $exception) {
                 return $exception->getMessage();
@@ -135,9 +140,9 @@ class NewsRepository implements NewsRepositoryInterface
         } else {
             $news = $this->newsModelFactory->create();
             $news->setAddedBy($data['admin_id']);
-            $news->setTitle($data['title']);
-            $news->setContent($data['content']);
-            $news->setStoreView($data['store_view']);
+            $news->setTitle($data[NewsInterface::TITLE]);
+            $news->setContent($data[NewsInterface::CONTENT]);
+            $news->setStoreView($data[NewsInterface::STORE_VIEW]);
             $this->save($news);
         }
         return true;

@@ -2,6 +2,8 @@
 
 namespace Inchoo\NewsWithComments\Controller\Comment;
 
+use Inchoo\NewsWithComments\Api\Data\CommentsInterface;
+use Inchoo\NewsWithComments\Api\Data\NewsInterface;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 
@@ -24,7 +26,6 @@ class Save extends Action
 
     public function __construct(
         Context $context,
-
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         \Inchoo\NewsWithComments\Api\Data\CommentsInterfaceFactory $commentsInterfaceFactory,
         \Inchoo\NewsWithComments\Api\CommentsRepositoryInterface $commentsRepository,
@@ -41,17 +42,17 @@ class Save extends Action
     public function execute()
     {
         $params = $this->request->getPost();
-        if ($params['content']) {
+        if ($params[CommentsInterface::COMMENT_CONTENT]) {
             $status = $this->commentsRepository->saveComment($params);
             if ($status === true) {
                 $this->messageManager->addSuccessMessage("Comment added, waiting admin approval");
-                return $this->_redirect('news/index/index/', ['id'=>$params['news_id']]);
+                return $this->_redirect('news/index/index/', ['id'=>$params[NewsInterface::NEWS_ID]]);
             } else {
                 $this->messageManager->addErrorMessage('Something Went Wrong');
                 return $this->_redirect('/');
             }
         }
         $this->messageManager->addErrorMessage("missing required field");
-        return $this->_redirect('news/index/index/', ['id'=>$params['news_id']]);
+        return $this->_redirect('news/index/index/', ['id'=>$params[NewsInterface::NEWS_ID]]);
     }
 }

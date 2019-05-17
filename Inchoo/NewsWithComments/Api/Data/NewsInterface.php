@@ -4,7 +4,8 @@ namespace Inchoo\NewsWithComments\Api\Data;
 
 interface NewsInterface
 {
-    /**#@+
+    /**
+* #@+
      * Constants for keys of data array. Identical to the name of the getter in snake case
      */
     const NEWS_ID       = 'news_id';
@@ -14,7 +15,9 @@ interface NewsInterface
     const ADDED_BY      = 'added_by';
     const PUBLISHED     = 'published';
     const STORE_VIEW    = 'store_view';
-    /**#@-*/
+    /**
+     * #@-
+     */
 
     /**
      * Get ID
@@ -65,7 +68,7 @@ interface NewsInterface
     /**
      * Set ID
      *
-     * @param string $id
+     * @param  string $id
      * @return NewsInterface
      */
     public function setId($id);
@@ -73,7 +76,7 @@ interface NewsInterface
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return NewsInterface
      */
     public function setTitle($title);
@@ -81,7 +84,7 @@ interface NewsInterface
     /**
      * Set content
      *
-     * @param string $content
+     * @param  string $content
      * @return NewsInterface
      */
     public function setContent($content);
@@ -89,26 +92,26 @@ interface NewsInterface
     /**
      * Set added at
      *
-     * @param string $addedAt
+     * @param  string $addedAt
      * @return NewsInterface
      */
     public function setAddedAt($addedAt);
 
     /**
-     * @param int $addedBy
+     * @param  int $addedBy
      * @return NewsInterface
      */
 
     public function setAddedBy($addedBy);
 
     /**
-     * @param bool $published
+     * @param  bool $published
      * @return NewsInterface
      */
     public function setPublished($published);
 
     /**
-     * @param $storeView
+     * @param  $storeView
      * @return NewsInterface
      */
     public function setStoreView($storeView);

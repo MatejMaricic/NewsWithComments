@@ -55,7 +55,7 @@ interface CommentsInterface
     /**
      * Set ID
      *
-     * @param string $id
+     * @param  string $id
      * @return CommentsInterface
      */
     public function setId($id);
@@ -63,7 +63,7 @@ interface CommentsInterface
     /**
      * Set title
      *
-     * @param string $content
+     * @param  string $content
      * @return CommentsInterface
      */
     public function setContent($content);
@@ -71,26 +71,26 @@ interface CommentsInterface
     /**
      * Set added at
      *
-     * @param string $addedAt
+     * @param  string $addedAt
      * @return CommentsInterface
      */
     public function setAddedAt($addedAt);
 
     /**
-     * @param int $addedBy
+     * @param  int $addedBy
      * @return CommentsInterface
      */
 
     public function setAddedBy($addedBy);
 
     /**
-     * @param bool $published
+     * @param  bool $published
      * @return CommentsInterface
      */
     public function setPublished($published);
 
     /**
-     * @param int $key
+     * @param  int $key
      * @return CommentsInterface
      */
     public function setForeignKey($key);

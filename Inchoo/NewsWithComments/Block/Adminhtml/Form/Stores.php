@@ -9,11 +9,17 @@ class Stores implements OptionSourceInterface
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
-    private $storeManager;
+    private $_storeManager;
 
-    public function __construct(\Magento\Store\Model\StoreManagerInterface $storeManager)
-    {
-        $this->storeManager = $storeManager;
+    /**
+     * Stores constructor.
+     *
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     */
+    public function __construct(
+        \Magento\Store\Model\StoreManagerInterface $storeManager
+    ) {
+        $this->_storeManager = $storeManager;
     }
 
     /**
@@ -21,7 +27,7 @@ class Stores implements OptionSourceInterface
      */
     public function toOptionArray()
     {
-        $stores = $this->storeManager->getStores();
+        $stores = $this->_storeManager->getStores();
         $options = [];
         foreach ($stores as $store) {
             $options[] = [

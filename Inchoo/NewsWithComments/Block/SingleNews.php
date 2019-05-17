@@ -2,6 +2,7 @@
 
 namespace Inchoo\NewsWithComments\Block;
 
+use Inchoo\NewsWithComments\Api\Data\CommentsInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\SortOrderBuilder;
 use Magento\Framework\View\Element\Template;
@@ -75,11 +76,11 @@ class SingleNews extends Template
     public function searchFilters($id)
     {
         $sortOrder = $this->sortOrderBuilder->create();
-        $sortOrder->setField('comment_id');
+        $sortOrder->setField(CommentsInterface::COMMENT_ID);
         $sortOrder->setDirection('DESC');
 
-        $this->searchCriteriaBuilder->addFilter('news', $id, 'eq');
-        $this->searchCriteriaBuilder->addFilter('comments_published', true, 'eq');
+        $this->searchCriteriaBuilder->addFilter(CommentsInterface::COMMENTS_KEY, $id, 'eq');
+        $this->searchCriteriaBuilder->addFilter(CommentsInterface::PUBLISHED, true, 'eq');
         $this->searchCriteriaBuilder->addSortOrder($sortOrder);
         $searchCriteria = $this->searchCriteriaBuilder->create();
         return $searchCriteria;

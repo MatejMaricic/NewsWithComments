@@ -13,12 +13,12 @@ class CommentsDataProvider extends AbstractDataProvider
 
 
     /**
-     * @param string $name
-     * @param string $primaryFieldName
-     * @param string $requestFieldName
+     * @param string                                                                  $name
+     * @param string                                                                  $primaryFieldName
+     * @param string                                                                  $requestFieldName
      * @param \Inchoo\NewsWithComments\Model\ResourceModel\Comments\CollectionFactory $collectionFactory
-     * @param array $meta
-     * @param array $data
+     * @param array                                                                   $meta
+     * @param array                                                                   $data
      */
     public function __construct(
         $name,
@@ -26,7 +26,6 @@ class CommentsDataProvider extends AbstractDataProvider
         $requestFieldName,
         \Inchoo\NewsWithComments\Model\ResourceModel\Comments\CollectionFactory $collectionFactory,
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepositoryInterface,
-
         array $meta = [],
         array $data = []
     ) {
