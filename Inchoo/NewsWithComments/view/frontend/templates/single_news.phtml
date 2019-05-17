@@ -38,7 +38,7 @@
 
                 <form action="<?= $block->getSaveAction() ?>" method="post" data-mage-init='{"validation":{}}'>
                     <input name="news_id" type="hidden" value="<?= $news->getId() ?>">
-                    <textarea name="content" type="text" data-validate='{"required":true}' style="width: 400px;"></textarea>
+                    <textarea name="comment_content" type="text" data-validate='{"required":true}' style="width: 400px;"></textarea>
                     <br>
                     <input type="submit" value="Comment">
                 </form>

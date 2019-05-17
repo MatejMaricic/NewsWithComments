@@ -2,6 +2,7 @@
 
 namespace Inchoo\NewsWithComments\Block;
 
+use Inchoo\NewsWithComments\Api\Data\NewsInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\SortOrder;
 use Magento\Framework\Api\SortOrderBuilder;
@@ -32,14 +33,14 @@ class News extends Template
     private $sortOrder;
 
     public function __construct(
-           Template\Context $context,
-           \Inchoo\NewsWithComments\Model\ResourceModel\News\CollectionFactory $newsCollectionFactory,
-           \Magento\Store\Model\StoreManagerInterface $storeManagerInterface,
-           \Inchoo\NewsWithComments\Api\NewsRepositoryInterface $newsRepository,
-           SearchCriteriaBuilder $searchCriteriaBuilder,
-           SortOrderBuilder $sortOrder,
-           array $data = []
-       ) {
+        Template\Context $context,
+        \Inchoo\NewsWithComments\Model\ResourceModel\News\CollectionFactory $newsCollectionFactory,
+        \Magento\Store\Model\StoreManagerInterface $storeManagerInterface,
+        \Inchoo\NewsWithComments\Api\NewsRepositoryInterface $newsRepository,
+        SearchCriteriaBuilder $searchCriteriaBuilder,
+        SortOrderBuilder $sortOrder,
+        array $data = []
+    ) {
         parent::__construct($context, $data);
 
         $this->newsCollectionFactory = $newsCollectionFactory;
@@ -67,11 +68,11 @@ class News extends Template
     public function getSearchCriteria()
     {
         $sortOrder = $this->sortOrder->create();
-        $sortOrder->setField('news_id');
+        $sortOrder->setField(NewsInterface::NEWS_ID);
         $sortOrder->setDirection('DESC');
 
-        $this->searchCriteriaBuilder->addFilter('store_view', $this->getStoreId(), 'eq');
-        $this->searchCriteriaBuilder->addFilter('published', true, 'eq');
+        $this->searchCriteriaBuilder->addFilter(NewsInterface::STORE_VIEW, $this->getStoreId(), 'eq');
+        $this->searchCriteriaBuilder->addFilter(NewsInterface::PUBLISHED, true, 'eq');
 
         $this->searchCriteriaBuilder->setPageSize(5);
 

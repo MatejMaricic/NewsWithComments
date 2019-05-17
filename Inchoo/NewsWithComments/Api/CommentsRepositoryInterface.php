@@ -9,7 +9,7 @@ interface CommentsRepositoryInterface
     /**
      * Retrieve comments.
      *
-     * @param int $commentsId
+     * @param  int $commentsId
      * @return \Inchoo\NewsWithComments\Api\Data\CommentsInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -18,7 +18,7 @@ interface CommentsRepositoryInterface
     /**
      * Save news.
      *
-     * @param \Inchoo\NewsWithComments\Api\Data\CommentsInterface $comments
+     * @param  \Inchoo\NewsWithComments\Api\Data\CommentsInterface $comments
      * @return \Inchoo\NewsWithComments\Api\Data\CommentsInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -27,7 +27,7 @@ interface CommentsRepositoryInterface
     /**
      * Delete news.
      *
-     * @param \Inchoo\NewsWithComments\Api\Data\CommentsInterface $comments
+     * @param  \Inchoo\NewsWithComments\Api\Data\CommentsInterface $comments
      * @return bool true on success
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -36,14 +36,14 @@ interface CommentsRepositoryInterface
     /**
      * Retrieve news matching the specified search criteria.
      *
-     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+     * @param  \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
      * @return \Inchoo\NewsWithComments\Api\Data\CommentsSearchResultsInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getList(SearchCriteriaInterface $searchCriteria);
 
     /**
-     * @param $foreignKey
+     * @param  $foreignKey
      * @return mixed
      */
     public function getByForeignKey($foreignKey);

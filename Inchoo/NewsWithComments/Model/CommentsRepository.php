@@ -5,6 +5,7 @@ namespace Inchoo\NewsWithComments\Model;
 use Inchoo\NewsWithComments\Api\CommentsRepositoryInterface;
 use Inchoo\NewsWithComments\Api\Data\CommentsInterface;
 use Inchoo\NewsWithComments\Api\Data\CommentsSearchResultsInterface;
+use Inchoo\NewsWithComments\Api\Data\NewsInterface;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
@@ -63,7 +64,7 @@ class CommentsRepository implements CommentsRepositoryInterface
     /**
      * Retrieve comments.
      *
-     * @param int $commentsId
+     * @param  int $commentsId
      * @return \Inchoo\NewsWithComments\Api\Data\CommentsInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -80,7 +81,7 @@ class CommentsRepository implements CommentsRepositoryInterface
     /**
      * Save news.
      *
-     * @param \Inchoo\NewsWithComments\Api\Data\CommentsInterface $comments
+     * @param  \Inchoo\NewsWithComments\Api\Data\CommentsInterface $comments
      * @return \Inchoo\NewsWithComments\Api\Data\CommentsInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -97,7 +98,7 @@ class CommentsRepository implements CommentsRepositoryInterface
     /**
      * Delete news.
      *
-     * @param \Inchoo\NewsWithComments\Api\Data\CommentsInterface $comments
+     * @param  \Inchoo\NewsWithComments\Api\Data\CommentsInterface $comments
      * @return bool true on success
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -113,18 +114,22 @@ class CommentsRepository implements CommentsRepositoryInterface
     /**
      * Retrieve news matching the specified search criteria.
      *
-     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+     * @param  \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
      * @return \Inchoo\NewsWithComments\Api\Data\CommentsSearchResultsInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getList(SearchCriteriaInterface $searchCriteria)
     {
-        /** @var \Inchoo\NewsWithComments\Model\ResourceModel\Comments\Collection $collection */
+        /**
+ * @var \Inchoo\NewsWithComments\Model\ResourceModel\Comments\Collection $collection 
+*/
         $collection = $this->commentsCollectionFactory->create();
 
         $this->collectionProcessor->process($searchCriteria, $collection);
 
-        /** @var CommentsSearchResultsInterface $searchResults */
+        /**
+ * @var CommentsSearchResultsInterface $searchResults 
+*/
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($searchCriteria);
         $searchResults->setItems($collection->getItems());
@@ -133,13 +138,13 @@ class CommentsRepository implements CommentsRepositoryInterface
     }
 
     /**
-     * @param $foreignKey
+     * @param  $foreignKey
      * @return mixed
      */
     public function getByForeignKey($foreignKey)
     {
         $comment = $this->commentsModelFactory->create();
-        $this->commentsResource->load($comment, $foreignKey, 'main_id');
+        $this->commentsResource->load($comment, $foreignKey, CommentsInterface::COMMENTS_KEY);
         if ($comment->getForeignKey() != $foreignKey) {
             return false;
         }
@@ -150,9 +155,9 @@ class CommentsRepository implements CommentsRepositoryInterface
     {
         try {
             $comment = $this->commentsModelFactory->create();
-            $comment->setContent($this->_escaper->escapeHtml($data['content']));
+            $comment->setContent($this->_escaper->escapeHtml($data[CommentsInterface::COMMENT_CONTENT]));
             $comment->setAddedBy((int)$this->customerSession->getCustomerId());
-            $comment->setForeignKey((int)$data['news_id']);
+            $comment->setForeignKey((int)$data[NewsInterface::NEWS_ID]);
 
             $this->commentsResource->save($comment);
         } catch (\Exception $exception) {

@@ -14,7 +14,9 @@ class NewAction extends Action
 
     public function execute()
     {
-        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
+        /**
+ * @var \Magento\Backend\Model\View\Result\Page $resultPage 
+*/
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
         $resultPage->setActiveMenu('Inchoo_NewsWithComments::news');
         $resultPage->getConfig()->getTitle()->prepend(__('Add News'));

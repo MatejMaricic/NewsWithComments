@@ -78,7 +78,7 @@ class News extends AbstractModel implements NewsInterface
     /**
      * Set ID
      *
-     * @param int $id
+     * @param  int $id
      * @return NewsInterface
      */
     public function setId($id)
@@ -89,7 +89,7 @@ class News extends AbstractModel implements NewsInterface
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return NewsInterface
      */
     public function setTitle($title)
@@ -100,7 +100,7 @@ class News extends AbstractModel implements NewsInterface
     /**
      * Set content
      *
-     * @param string $content
+     * @param  string $content
      * @return NewsInterface
      */
     public function setContent($content)
@@ -111,7 +111,7 @@ class News extends AbstractModel implements NewsInterface
     /**
      * Set added at
      *
-     * @param string $addedAt
+     * @param  string $addedAt
      * @return NewsInterface
      */
     public function setAddedAt($addedAt)
@@ -120,7 +120,7 @@ class News extends AbstractModel implements NewsInterface
     }
 
     /**
-     * @param int $addedBy
+     * @param  int $addedBy
      * @return NewsInterface
      */
     public function setAddedBy($addedBy)
@@ -129,7 +129,7 @@ class News extends AbstractModel implements NewsInterface
     }
 
     /**
-     * @param bool $published
+     * @param  bool $published
      * @return NewsInterface
      */
     public function setPublished($published)
@@ -146,7 +146,7 @@ class News extends AbstractModel implements NewsInterface
     }
 
     /**
-     * @param $storeView
+     * @param  $storeView
      * @return NewsInterface
      */
     public function setStoreView($storeView)

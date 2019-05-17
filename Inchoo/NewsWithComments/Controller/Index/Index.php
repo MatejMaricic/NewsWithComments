@@ -15,7 +15,6 @@ class Index extends Action
 
     public function __construct(
         Context $context,
-
         \Magento\Framework\View\Result\PageFactory $resultPageFactory
     ) {
         parent::__construct($context);

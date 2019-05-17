@@ -2,6 +2,7 @@
 
 namespace Inchoo\NewsWithComments\Block;
 
+use Inchoo\NewsWithComments\Api\Data\NewsInterface;
 use Magento\Framework\View\Element\Template;
 
 class AllNews extends Template
@@ -60,8 +61,8 @@ class AllNews extends Template
         $collection->setPageSize($pageSize);
         $collection->setCurPage($page);
 
-        $collection->addFieldToFilter('published', '1');
-        $collection->addFieldToFilter('store_view', 1);
+        $collection->addFieldToFilter(NewsInterface::PUBLISHED, '1');
+        $collection->addFieldToFilter(NewsInterface::STORE_VIEW, 1);
         return $collection;
     }
 }

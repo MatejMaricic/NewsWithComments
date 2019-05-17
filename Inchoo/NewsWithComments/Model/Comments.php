@@ -78,7 +78,7 @@ class Comments extends AbstractModel implements CommentsInterface
     /**
      * Set id
      *
-     * @param int $id
+     * @param  int $id
      * @return CommentsInterface
      */
     public function setId($id)
@@ -89,7 +89,7 @@ class Comments extends AbstractModel implements CommentsInterface
     /**
      * Set title
      *
-     * @param string $content
+     * @param  string $content
      * @return CommentsInterface
      */
     public function setContent($content)
@@ -100,7 +100,7 @@ class Comments extends AbstractModel implements CommentsInterface
     /**
      * Set added at
      *
-     * @param string $addedAt
+     * @param  string $addedAt
      * @return CommentsInterface
      */
     public function setAddedAt($addedAt)
@@ -109,7 +109,7 @@ class Comments extends AbstractModel implements CommentsInterface
     }
 
     /**
-     * @param int $addedBy
+     * @param  int $addedBy
      * @return CommentsInterface
      */
     public function setAddedBy($addedBy)
@@ -118,7 +118,7 @@ class Comments extends AbstractModel implements CommentsInterface
     }
 
     /**
-     * @param bool $published
+     * @param  bool $published
      * @return CommentsInterface
      */
     public function setPublished($published)
@@ -127,7 +127,7 @@ class Comments extends AbstractModel implements CommentsInterface
     }
 
     /**
-     * @param int $key
+     * @param  int $key
      * @return CommentsInterface
      */
     public function setForeignKey($key)

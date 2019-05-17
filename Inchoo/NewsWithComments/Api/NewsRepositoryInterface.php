@@ -9,7 +9,7 @@ interface NewsRepositoryInterface
     /**
      * Retrieve news.
      *
-     * @param int $newsId
+     * @param  int $newsId
      * @return \Inchoo\NewsWithComments\Api\Data\NewsInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -18,7 +18,7 @@ interface NewsRepositoryInterface
     /**
      * Save news.
      *
-     * @param \Inchoo\NewsWithComments\Api\Data\NewsInterface $news
+     * @param  \Inchoo\NewsWithComments\Api\Data\NewsInterface $news
      * @return \Inchoo\NewsWithComments\Api\Data\NewsInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -27,7 +27,7 @@ interface NewsRepositoryInterface
     /**
      * Delete news.
      *
-     * @param \Inchoo\NewsWithComments\Api\Data\NewsInterface $news
+     * @param  \Inchoo\NewsWithComments\Api\Data\NewsInterface $news
      * @return bool true on success
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -36,7 +36,7 @@ interface NewsRepositoryInterface
     /**
      * Retrieve news matching the specified search criteria.
      *
-     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+     * @param  \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
      * @return \Inchoo\NewsWithComments\Api\Data\NewsSearchResultsInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
