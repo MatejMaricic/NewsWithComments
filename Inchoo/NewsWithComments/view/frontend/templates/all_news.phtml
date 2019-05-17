@@ -1,7 +1,8 @@
+
 <?php
-/**@var \Inchoo\NewsWithComments\Block\News $block */
+/**@var \Inchoo\NewsWithComments\Block\AllNews $block */
 ?>
-<?php $news = $block->getNews(); ?>
+<?php $news = $block->getNewsCollection(); ?>
 
 <div class="container">
     <div class="widget block block-static-block">
@@ -22,8 +23,11 @@
                 <hr>
             </div>
         <?php endforeach;?>
-        <h3>
-            <a href="<?= $block->getAllNewsUrl() ?>">Show All News</a>
-        </h3>
     </div>
 </div>
+<?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+
+<?php else: ?>
+    <div class="message info empty"><span><?php echo __('No any record.'); ?></span></div>
+<?php endif ?>
