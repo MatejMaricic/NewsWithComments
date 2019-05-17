@@ -44,7 +44,7 @@ class Save extends Action
         if ($params['content']) {
             $status = $this->commentsRepository->saveComment($params);
             if ($status === true) {
-                $this->messageManager->addSuccessMessage("Comment added");
+                $this->messageManager->addSuccessMessage("Comment added, waiting admin approval");
                 return $this->_redirect('news/index/index/', ['id'=>$params['news_id']]);
             } else {
                 $this->messageManager->addErrorMessage('Something Went Wrong');
