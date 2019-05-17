@@ -2,6 +2,10 @@ Inchoo News extension
 
 - Magento Extension -
 
+- Administration for news and comments is found in Admin->Content->Manage News-> News/Comments
+
+- All comments and posting new comments can be disabled from Stores->Configuration->Comments Config
+
 This task is created for the learning purpose for the interns or new employees who are getting familiar with Magento. The goal is to create “Inchoo News” Magento Extension. Extension will let administrators to add news and customers to read and comment news.
 
 The extension needs to have following features:
