@@ -55,6 +55,15 @@ class NewsDataProvider extends AbstractDataProvider
     public function getData()
     {
         $data = $this->getCollection()->toArray();
+
+        foreach ($data['items'] as $item => $value) {
+            if ($value['published'] == 1) {
+                $data['items'][$item]['published'] = "True";
+            } else {
+                $data['items'][$item]['published'] = "False";
+            }
+            $data['items'][$item]['added_by'] = $this->getAdminName($value['added_by']);
+        }
         return $data;
     }
 }

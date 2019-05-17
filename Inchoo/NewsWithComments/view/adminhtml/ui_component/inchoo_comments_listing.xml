@@ -47,7 +47,7 @@
                         <message translate="true">Delete selected items?</message>
                         <title translate="true">Delete items</title>
                     </confirm>
-                    <url path="news/comments/delete"/>
+                    <url path="comments/comments/delete"/>
                     <type>delete</type>
                     <label translate="true">Delete</label>
                 </settings>
@@ -58,7 +58,7 @@
                         <message translate="true">Publish selected items?</message>
                         <title translate="true">Publish items</title>
                     </confirm>
-                    <url path="news/comments/publish"/>
+                    <url path="comments/comments/publish"/>
                     <type>publish</type>
                     <label translate="true">Publish</label>
                 </settings>
@@ -69,7 +69,7 @@
                         <message translate="true">Disable selected items?</message>
                         <title translate="true">Disable items</title>
                     </confirm>
-                    <url path="news/comments/disable"/>
+                    <url path="comments/comments/disable"/>
                     <type>disable</type>
                     <label translate="true">Disable</label>
                 </settings>

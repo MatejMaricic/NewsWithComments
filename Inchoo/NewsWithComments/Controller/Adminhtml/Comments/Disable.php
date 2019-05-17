@@ -21,9 +21,12 @@ class Disable extends Action
 
     public function execute()
     {
-        $ids = $this->_request->getParam('selected');
-        $message = $this->commentsRepository->disableComments($ids);
-        $this->messageManager->addNoticeMessage($message);
+        if ($ids = $this->_request->getParam('selected')) {
+            $message = $this->commentsRepository->disableComments($ids);
+            $this->messageManager->addNoticeMessage($message);
+            return $this->_redirect('comments/comments');
+        }
+
         return $this->_redirect('comments/comments');
     }
 }
