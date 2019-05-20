@@ -36,11 +36,15 @@ class Index extends Action
 
     public function execute()
     {
-        $news = $this->newsRepository->getById($this->_request->getParam('id'));
-        $view = $news->getStoreView();
+        try {
+            $news = $this->newsRepository->getById($this->_request->getParam('id'));
+            $view = $news->getStoreView();
+        } catch (\Exception $exception) {
+            $this->messageManager->addNoticeMessage('News does not exist');
+            return $this->_redirect('/');
+        }
 
         if ($this->storeManagerInterface->getStore()->getId() == $view) {
-
             $resultPage = $this->resultPageFactory->create();
             return $resultPage;
         }
