@@ -18,7 +18,7 @@
                     <?=$block->escapeHtml($item->getContent());?>
                 </p>
                 <p class="item product">
-                    <?=$block->escapeHtml($item->getAddedAt())|date('Y-m-d');?>
+                    <?=$block->escapeHtml($item->getAddedAt());?>
                 </p>
                 <hr>
             </div>
@@ -26,8 +26,8 @@
     </div>
 </div>
 <?php if ($block->getPagerHtml()): ?>
-        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+        <div class="order-products-toolbar toolbar bottom"><?= $block->getPagerHtml(); ?></div>
 
 <?php else: ?>
-    <div class="message info empty"><span><?php echo __('No any record.'); ?></span></div>
+    <div class="message info empty"><span><?= __('No any record.'); ?></span></div>
 <?php endif ?>
