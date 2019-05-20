@@ -109,14 +109,14 @@ class NewsRepository implements NewsRepositoryInterface
     public function getList(SearchCriteriaInterface $searchCriteria)
     {
         /**
- * @var \Inchoo\NewsWithComments\Model\ResourceModel\News\Collection $collection 
+ * @var \Inchoo\NewsWithComments\Model\ResourceModel\News\Collection $collection
 */
         $collection = $this->newsCollectionFactory->create();
 
         $this->collectionProcessor->process($searchCriteria, $collection);
 
         /**
- * @var Data\NewsSearchResultsInterface $searchResults 
+ * @var Data\NewsSearchResultsInterface $searchResults
 */
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($searchCriteria);
@@ -138,14 +138,17 @@ class NewsRepository implements NewsRepositoryInterface
                 return $exception->getMessage();
             }
         } else {
-            $news = $this->newsModelFactory->create();
-            $news->setAddedBy($data['admin_id']);
-            $news->setTitle($data[NewsInterface::TITLE]);
-            $news->setContent($data[NewsInterface::CONTENT]);
-            $news->setStoreView($data[NewsInterface::STORE_VIEW]);
-            $this->save($news);
+            try {
+                $news = $this->newsModelFactory->create();
+                $news->setAddedBy($data['admin_id']);
+                $news->setTitle($data[NewsInterface::TITLE]);
+                $news->setContent($data[NewsInterface::CONTENT]);
+                $news->setStoreView($data[NewsInterface::STORE_VIEW]);
+                $this->save($news);
+            } catch (\Exception $exception) {
+                return $exception->getMessage();
+            }
         }
         return true;
     }
-
 }

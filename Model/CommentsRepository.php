@@ -121,14 +121,14 @@ class CommentsRepository implements CommentsRepositoryInterface
     public function getList(SearchCriteriaInterface $searchCriteria)
     {
         /**
- * @var \Inchoo\NewsWithComments\Model\ResourceModel\Comments\Collection $collection 
+ * @var \Inchoo\NewsWithComments\Model\ResourceModel\Comments\Collection $collection
 */
         $collection = $this->commentsCollectionFactory->create();
 
         $this->collectionProcessor->process($searchCriteria, $collection);
 
         /**
- * @var CommentsSearchResultsInterface $searchResults 
+ * @var CommentsSearchResultsInterface $searchResults
 */
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($searchCriteria);
@@ -151,6 +151,11 @@ class CommentsRepository implements CommentsRepositoryInterface
         return $comment;
     }
 
+    /**
+     * Saves New Comment
+     * @param $data
+     * @return bool|string
+     */
     public function saveComment($data)
     {
         try {
@@ -165,5 +170,4 @@ class CommentsRepository implements CommentsRepositoryInterface
         }
         return true;
     }
-
 }
