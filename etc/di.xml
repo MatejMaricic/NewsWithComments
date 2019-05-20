@@ -10,12 +10,4 @@
     <preference for="Inchoo\NewsWithComments\Api\Data\CommentsInterface" type="Inchoo\NewsWithComments\Model\Comments" />
     <preference for="Inchoo\NewsWithComments\Api\CommentsRepositoryInterface" type="Inchoo\NewsWithComments\Model\CommentsRepository" />
 
-    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
-        <arguments>
-            <argument name="collections" xsi:type="array">
-                <item name="inchoo_news_listing_data_source" xsi:type="string">\Inchoo\NewsWithComments\Model\ResourceModel\News\Collection</item>
-                <item name="inchoo_comments_listing_data_source" xsi:type="string">\Inchoo\NewsWithComments\Model\ResourceModel\Comments\Collection</item>
-            </argument>
-        </arguments>
-    </type>
 </config>

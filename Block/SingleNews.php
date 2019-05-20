@@ -86,10 +86,9 @@ class SingleNews extends Template
         return $searchCriteria;
     }
 
-    public function getConfig()
+    public function isEnabled()
     {
-        $config = $this->scopeConfig->getValue('newswithcomments/general/enable');
-        return $config;
+       return (bool)$this->scopeConfig->getValue('newswithcomments/general/enable');
     }
 
     public function isLoggedIn()

@@ -17,9 +17,9 @@
         </p>
         <hr>
 
-        <?php if ($block->getConfig() === '1'): ?>
+        <?php if ($block->isEnabled()): ?>
 
-            <h2>Comments</h2>
+            <h2><?=__('Comments')?></h2>
 
             <?php foreach ($news->getComments() as $comment): ?>
                 <div>

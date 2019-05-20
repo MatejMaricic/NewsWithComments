@@ -12,15 +12,10 @@ class Index extends Action
         parent::__construct($context);
     }
 
-    protected function _isAllowed()
-    {
-        return $this->_authorization->isAllowed('Inchoo_NewsWithComments::news');
-    }
-
     public function execute()
     {
         /**
- * @var \Magento\Backend\Model\View\Result\Page $resultPage 
+ * @var \Magento\Backend\Model\View\Result\Page $resultPage
 */
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
 
@@ -28,6 +23,5 @@ class Index extends Action
         $resultPage->getConfig()->getTitle()->prepend(__('News'));
 
         return $resultPage;
-
     }
 }
