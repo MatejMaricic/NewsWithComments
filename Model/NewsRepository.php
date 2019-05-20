@@ -148,44 +148,4 @@ class NewsRepository implements NewsRepositoryInterface
         return true;
     }
 
-    public function disableNews($id)
-    {
-        try {
-            foreach ($id as $singleId) {
-                $news = $this->getById($singleId);
-                $news->setPublished(false);
-                $this->save($news);
-            }
-        } catch (\Exception $exception) {
-            return "Could not disable selected news";
-        }
-        return "News Disabled";
-    }
-
-    public function publishNews($id)
-    {
-        try {
-            foreach ($id as $singleId) {
-                $news = $this->getById($singleId);
-                $news->setPublished(true);
-                $this->save($news);
-            }
-        } catch (\Exception $exception) {
-            return "Could not publish selected news";
-        }
-        return "News Published";
-    }
-
-    public function deleteNews($id)
-    {
-        try {
-            foreach ($id as $singleId) {
-                $news = $this->getById($singleId);
-                $this->delete($news);
-            }
-        } catch (\Exception $exception) {
-            return "Could not delete selected news";
-        }
-        return "News Deleted";
-    }
 }
