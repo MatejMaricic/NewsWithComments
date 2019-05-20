@@ -3,5 +3,6 @@
         <referenceContainer name="content">
             <block class="Inchoo\NewsWithComments\Block\SingleNews" name="single_news" template="Inchoo_NewsWithComments::single_news.phtml" cacheable="false" />
         </referenceContainer>
+        <referenceBlock name="page.main.title" remove="true" />
     </body>
 </page>

@@ -25,6 +25,7 @@ class View extends Action
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
+        $resultPage->getConfig()->getTitle()->set('All News');
         return $resultPage;
     }
 }

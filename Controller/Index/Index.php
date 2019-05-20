@@ -46,6 +46,7 @@ class Index extends Action
 
         if ($this->storeManagerInterface->getStore()->getId() == $view) {
             $resultPage = $this->resultPageFactory->create();
+            $resultPage->getConfig()->getTitle()->set('Single News');
             return $resultPage;
         }
         return $this->_redirect('/');
