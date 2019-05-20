@@ -33,8 +33,13 @@ class Publish extends Action
                 ->addFieldToFilter('comment_id', $ids);
 
             foreach ($collection as $comment) {
-                $comment->setPublished(true);
-                $this->commentsRepository->save($comment);
+                try {
+                    $comment->setPublished(true);
+                    $this->commentsRepository->save($comment);
+                } catch (\Exception $exception) {
+                    $this->messageManager->addErrorMessage('Could not Publish Comment');
+                    return $this->_redirect('comments/comments');
+                }
             }
             $this->messageManager->addSuccessMessage('Selected Comments Published');
             return $this->_redirect('comments/comments');

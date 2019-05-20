@@ -33,8 +33,13 @@ class Publish extends Action
                 ->addFieldToFilter('news_id', $ids);
 
             foreach ($collection as $news) {
-                $news->setPublished(true);
-                $this->newsRepository->save($news);
+                try {
+                    $news->setPublished(true);
+                    $this->newsRepository->save($news);
+                } catch (\Exception $exception) {
+                    $this->messageManager->addErrorMessage('Could Not Publish Selected News');
+                    return $this->_redirect('news/news');
+                }
             }
             $this->messageManager->addSuccessMessage('Selected News Published');
             return $this->_redirect('news/news');

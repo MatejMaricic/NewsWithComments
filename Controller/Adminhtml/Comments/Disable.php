@@ -33,8 +33,13 @@ class Disable extends Action
                 ->addFieldToFilter('comment_id', $ids);
 
             foreach ($collection as $comment) {
-                $comment->setPublished(false);
-                $this->commentsRepository->save($comment);
+                try {
+                    $comment->setPublished(false);
+                    $this->commentsRepository->save($comment);
+                } catch (\Exception $exception) {
+                    $this->messageManager->addErrorMessage('Could not Disable Comment');
+                    return $this->_redirect('comments/comments');
+                }
             }
             $this->messageManager->addSuccessMessage('Selected Comments Deleted');
             return $this->_redirect('comments/comments');

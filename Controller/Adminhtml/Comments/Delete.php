@@ -33,7 +33,12 @@ class Delete extends Action
                 ->addFieldToFilter('comment_id', $ids);
 
             foreach ($collection as $news) {
-                $this->commentsRepository->delete($news);
+                try {
+                    $this->commentsRepository->delete($news);
+                } catch (\Exception $exception) {
+                    $this->messageManager->addErrorMessage('Could not delete entity');
+                    return $this->_redirect('comments/comments');
+                }
             }
             $this->messageManager->addSuccessMessage('Selected Comments Deleted');
             return $this->_redirect('comments/comments');

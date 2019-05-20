@@ -33,14 +33,18 @@ class Disable extends Action
                 ->addFieldToFilter('news_id', $ids);
 
             foreach ($collection as $news) {
-                $news->setPublished(false);
-                $this->newsRepository->save($news);
+                try {
+                    $news->setPublished(false);
+                    $this->newsRepository->save($news);
+                } catch (\Exception $exception) {
+                    $this->messageManager->addErrorMessage('Could Not Disable Selected News');
+                    return $this->_redirect('news/news');
+                }
             }
             $this->messageManager->addSuccessMessage('Selected News Disabled');
             return $this->_redirect('news/news');
         }
 
         return $this->_redirect('news/news');
-
     }
 }

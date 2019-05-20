@@ -33,7 +33,12 @@ class Delete extends Action
                 ->addFieldToFilter('news_id', $ids);
 
             foreach ($collection as $news) {
-                $this->newsRepository->delete($news);
+                try {
+                    $this->newsRepository->delete($news);
+                } catch (\Exception $exception) {
+                    $this->messageManager->addErrorMessage('Could Not Delete News');
+                    return $this->_redirect('news/news');
+                }
             }
             $this->messageManager->addSuccessMessage('Selected News Deleted');
             return $this->_redirect('news/news');
