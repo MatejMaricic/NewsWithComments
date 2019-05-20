@@ -3,9 +3,7 @@
     <default>
         <newswithcomments>
             <general>
-                <enable>
-                    1
-                </enable>
+                <enable>1</enable>
             </general>
         </newswithcomments>
     </default>
