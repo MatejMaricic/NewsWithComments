@@ -2,7 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
 <body>
     <referenceContainer name="content.top">
-        <block class="Inchoo\NewsWithComments\Block\News" name="news_block" template="Inchoo_NewsWithComments::news.phtml">
+        <block class="Inchoo\NewsWithComments\Block\News" name="news_block" template="Inchoo_NewsWithComments::news.phtml" cacheable="false">
             <arguments>
                 <argument name="block_id" xsi:type="string">block1</argument>
             </arguments>
