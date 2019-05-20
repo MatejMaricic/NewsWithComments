@@ -11,14 +11,20 @@ class AllNews extends Template
      * @var \Inchoo\NewsWithComments\Model\ResourceModel\News\CollectionFactory
      */
     private $newsCollectionFactory;
+    /**
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    private $storeManagerInterface;
 
     public function __construct(
         Template\Context $context,
         \Inchoo\NewsWithComments\Model\ResourceModel\News\CollectionFactory $newsCollectionFactory,
+        \Magento\Store\Model\StoreManagerInterface $storeManagerInterface,
         array $data = []
     ) {
         parent::__construct($context, $data);
         $this->newsCollectionFactory = $newsCollectionFactory;
+        $this->storeManagerInterface = $storeManagerInterface;
     }
 
     protected function _prepareLayout()
@@ -51,6 +57,11 @@ class AllNews extends Template
         return $this->getUrl('news/index/index/id/', ["id" => $id]);
     }
 
+    public function getStoreId()
+    {
+        return $this->storeManagerInterface->getStore()->getId();
+    }
+
     public function getNewsCollection()
     {
         $pageSize = ($this->getRequest()->getParam('limit')) ? $this->getRequest()->getParam('limit') : 5;
@@ -62,7 +73,7 @@ class AllNews extends Template
         $collection->setCurPage($page);
 
         $collection->addFieldToFilter(NewsInterface::PUBLISHED, '1');
-        $collection->addFieldToFilter(NewsInterface::STORE_VIEW, 1);
+        $collection->addFieldToFilter(NewsInterface::STORE_VIEW, $this->getStoreId());
         return $collection;
     }
 }
