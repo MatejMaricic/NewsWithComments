@@ -2,6 +2,7 @@
 
 namespace Inchoo\NewsWithComments\Controller\Adminhtml\Comments;
 
+use Inchoo\NewsWithComments\Api\Data\CommentsInterface;
 use Magento\Backend\App\Action;
 
 class massDisable extends Action
@@ -24,6 +25,11 @@ class massDisable extends Action
         $this->commentsRepository = $commentsRepository;
         $this->commentsCollectionFactory = $commentsCollectionFactory;
     }
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed(CommentsInterface::ADMIN_RESOURCE);
+    }
+
 
     public function execute()
     {
@@ -41,7 +47,7 @@ class massDisable extends Action
                     return $this->_redirect('comments/comments');
                 }
             }
-            $this->messageManager->addSuccessMessage('Selected Comments Deleted');
+            $this->messageManager->addSuccessMessage('Selected Comments Disabled');
             return $this->_redirect('comments/comments');
         }
 

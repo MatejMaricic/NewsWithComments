@@ -2,6 +2,7 @@
 
 namespace Inchoo\NewsWithComments\Controller\Adminhtml\News;
 
+use Inchoo\NewsWithComments\Api\Data\NewsInterface;
 use Magento\Backend\App\Action;
 use Magento\Framework\App\ResponseInterface;
 
@@ -41,6 +42,11 @@ class Save extends Action
         $this->messageManager = $messageManager;
         $this->_escaper = $_escaper;
         $this->authSession = $authSession;
+    }
+
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed(NewsInterface::ADMIN_RESOURCE);
     }
 
     public function getCurrentUser()

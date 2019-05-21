@@ -2,6 +2,7 @@
 
 namespace Inchoo\NewsWithComments\Controller\Adminhtml\News;
 
+use Inchoo\NewsWithComments\Api\Data\NewsInterface;
 use Magento\Backend\App\Action;
 use Magento\Framework\Controller\ResultFactory;
 
@@ -10,6 +11,11 @@ class NewAction extends Action
     public function __construct(Action\Context $context)
     {
         parent::__construct($context);
+    }
+
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed(NewsInterface::ADMIN_RESOURCE);
     }
 
     public function execute()

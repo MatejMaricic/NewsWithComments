@@ -15,6 +15,7 @@ interface NewsInterface
     const ADDED_BY      = 'added_by';
     const PUBLISHED     = 'published';
     const STORE_VIEW    = 'store_view';
+    const ADMIN_RESOURCE= 'Inchoo_NewsWithComments::news';
     /**
      * #@-
      */

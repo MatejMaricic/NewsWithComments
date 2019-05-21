@@ -2,11 +2,16 @@
 
 namespace Inchoo\NewsWithComments\Controller\Adminhtml\News;
 
+use Inchoo\NewsWithComments\Api\Data\NewsInterface;
 use Magento\Backend\App\Action;
 use Magento\Framework\Controller\ResultFactory;
 
 class Edit extends Action
 {
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed(NewsInterface::ADMIN_RESOURCE);
+    }
     public function execute()
     {
         /**

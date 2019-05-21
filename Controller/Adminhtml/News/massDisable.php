@@ -2,6 +2,7 @@
 
 namespace Inchoo\NewsWithComments\Controller\Adminhtml\News;
 
+use Inchoo\NewsWithComments\Api\Data\NewsInterface;
 use Magento\Backend\App\Action;
 
 class massDisable extends Action
@@ -23,6 +24,11 @@ class massDisable extends Action
         parent::__construct($context);
         $this->newsRepository = $newsRepository;
         $this->newsCollectionFactory = $newsCollectionFactory;
+    }
+
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed(NewsInterface::ADMIN_RESOURCE);
     }
 
     public function execute()

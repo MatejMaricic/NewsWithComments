@@ -10,6 +10,7 @@ interface CommentsInterface
     const ADDED_AT         = 'comment_added_at';
     const ADDED_BY         = 'comment_added_by';
     const PUBLISHED        = 'comments_published';
+    const ADMIN_RESOURCE   = 'Inchoo_NewsWithComments::comments';
 
     /**
      * Get ID
