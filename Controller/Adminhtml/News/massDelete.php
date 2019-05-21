@@ -4,7 +4,7 @@ namespace Inchoo\NewsWithComments\Controller\Adminhtml\News;
 
 use Magento\Backend\App\Action;
 
-class Delete extends Action
+class massDelete extends Action
 {
     /**
      * @var \Inchoo\NewsWithComments\Api\NewsRepositoryInterface

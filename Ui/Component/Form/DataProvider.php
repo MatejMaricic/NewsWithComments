@@ -6,10 +6,6 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
 
 class DataProvider extends AbstractDataProvider
 {
-    /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    private $storeManager;
 
     /**
      * @param string                                                              $name
@@ -24,14 +20,12 @@ class DataProvider extends AbstractDataProvider
         $primaryFieldName,
         $requestFieldName,
         \Inchoo\NewsWithComments\Model\ResourceModel\News\CollectionFactory $collectionFactory,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
         array $meta = [],
         array $data = []
     ) {
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
 
         $this->collection = $collectionFactory->create();
-        $this->storeManager = $storeManager;
     }
 
     /**

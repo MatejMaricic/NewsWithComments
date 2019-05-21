@@ -4,7 +4,7 @@ namespace Inchoo\NewsWithComments\Controller\Adminhtml\Comments;
 
 use Magento\Backend\App\Action;
 
-class Disable extends Action
+class massDisable extends Action
 {
     /**
      * @var \Inchoo\NewsWithComments\Api\CommentsRepositoryInterface

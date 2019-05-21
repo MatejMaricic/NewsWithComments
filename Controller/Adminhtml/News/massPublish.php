@@ -4,7 +4,7 @@ namespace Inchoo\NewsWithComments\Controller\Adminhtml\News;
 
 use Magento\Backend\App\Action;
 
-class Publish extends Action
+class massPublish extends Action
 {
     /**
      * @var \Inchoo\NewsWithComments\Api\NewsRepositoryInterface

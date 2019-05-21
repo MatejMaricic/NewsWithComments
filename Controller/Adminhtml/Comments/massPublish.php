@@ -4,7 +4,7 @@ namespace Inchoo\NewsWithComments\Controller\Adminhtml\Comments;
 
 use Magento\Backend\App\Action;
 
-class Delete extends Action
+class massPublish extends Action
 {
     /**
      * @var \Inchoo\NewsWithComments\Api\CommentsRepositoryInterface
@@ -32,15 +32,16 @@ class Delete extends Action
                 ->create()
                 ->addFieldToFilter('comment_id', $ids);
 
-            foreach ($collection as $news) {
+            foreach ($collection as $comment) {
                 try {
-                    $this->commentsRepository->delete($news);
+                    $comment->setPublished(true);
+                    $this->commentsRepository->save($comment);
                 } catch (\Exception $exception) {
-                    $this->messageManager->addErrorMessage('Could not delete entity');
+                    $this->messageManager->addErrorMessage('Could not Publish Comment');
                     return $this->_redirect('comments/comments');
                 }
             }
-            $this->messageManager->addSuccessMessage('Selected Comments Deleted');
+            $this->messageManager->addSuccessMessage('Selected Comments Published');
             return $this->_redirect('comments/comments');
         }
 

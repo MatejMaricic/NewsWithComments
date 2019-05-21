@@ -137,19 +137,6 @@ class CommentsRepository implements CommentsRepositoryInterface
         return $searchResults;
     }
 
-    /**
-     * @param  $foreignKey
-     * @return mixed
-     */
-    public function getByForeignKey($foreignKey)
-    {
-        $comment = $this->commentsModelFactory->create();
-        $this->commentsResource->load($comment, $foreignKey, CommentsInterface::COMMENTS_KEY);
-        if ($comment->getForeignKey() != $foreignKey) {
-            return false;
-        }
-        return $comment;
-    }
 
     /**
      * Saves New Comment

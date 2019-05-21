@@ -42,12 +42,6 @@ interface CommentsRepositoryInterface
      */
     public function getList(SearchCriteriaInterface $searchCriteria);
 
-    /**
-     * @param  $foreignKey
-     * @return mixed
-     */
-    public function getByForeignKey($foreignKey);
-
     public function saveComment($comment);
 
 }
