@@ -16,6 +16,8 @@ class AllNews extends Template
      */
     private $storeManagerInterface;
 
+    private $newsCollection;
+
     public function __construct(
         Template\Context $context,
         \Inchoo\NewsWithComments\Model\ResourceModel\News\CollectionFactory $newsCollectionFactory,
@@ -64,16 +66,14 @@ class AllNews extends Template
 
     public function getNewsCollection()
     {
-        $pageSize = ($this->getRequest()->getParam('limit')) ? $this->getRequest()->getParam('limit') : 5;
-        $page = ($this->getRequest()->getParam('p')) ? $this->getRequest()->getParam('p') : 1;
+        if ($this->newsCollection !== null) {
+            return $this->newsCollection;
+        }
 
-        $collection = $this->newsCollectionFactory->create();
+        $this->newsCollection = $this->newsCollectionFactory->create();
 
-        $collection->setPageSize($pageSize);
-        $collection->setCurPage($page);
-
-        $collection->addFieldToFilter(NewsInterface::PUBLISHED, '1');
-        $collection->addFieldToFilter(NewsInterface::STORE_VIEW, $this->getStoreId());
-        return $collection;
+        $this->newsCollection->addFieldToFilter(NewsInterface::PUBLISHED, '1');
+        $this->newsCollection->addFieldToFilter(NewsInterface::STORE_VIEW, $this->getStoreId());
+        return $this->newsCollection;
     }
 }
