@@ -5,7 +5,7 @@ namespace Inchoo\NewsWithComments\Controller\Adminhtml\News;
 use Inchoo\NewsWithComments\Api\Data\NewsInterface;
 use Magento\Backend\App\Action;
 
-class massPublish extends Action
+class MassDelete extends Action
 {
     /**
      * @var \Inchoo\NewsWithComments\Api\NewsRepositoryInterface
@@ -40,18 +40,16 @@ class massPublish extends Action
 
             foreach ($collection as $news) {
                 try {
-                    $news->setPublished(true);
-                    $this->newsRepository->save($news);
+                    $this->newsRepository->delete($news);
                 } catch (\Exception $exception) {
-                    $this->messageManager->addErrorMessage('Could Not Publish Selected News');
+                    $this->messageManager->addErrorMessage('Could Not Delete News');
                     return $this->_redirect('news/news');
                 }
             }
-            $this->messageManager->addSuccessMessage('Selected News Published');
+            $this->messageManager->addSuccessMessage('Selected News Deleted');
             return $this->_redirect('news/news');
         }
 
         return $this->_redirect('news/news');
-
     }
 }

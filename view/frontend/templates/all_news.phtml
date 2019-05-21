@@ -6,10 +6,10 @@
 
 <div class="container">
     <div class="widget block block-static-block">
-        <?php foreach ($news as $item): ?>
+        <?php foreach ($news as $item) : ?>
             <div>
                 <h3 class="product name product-item-name">
-                    <a href="<?= $block->getSingleNewsUrl($item->getId()); ?>">
+                    <a href="<?= $block->escapeUrl($block->getSingleNewsUrl($item->getId())); ?>">
                         <?= $block->escapeHtml($item->getTitle()); ?>
                     </a>
                 </h3>
@@ -25,9 +25,9 @@
         <?php endforeach;?>
     </div>
 </div>
-<?php if ($block->getPagerHtml()): ?>
+<?php if ($block->getPagerHtml()) : ?>
         <div class="order-products-toolbar toolbar bottom"><?= $block->getPagerHtml(); ?></div>
 
-<?php else: ?>
-    <div class="message info empty"><span><?= __('No records.'); ?></span></div>
+<?php else : ?>
+    <div class="message info empty"><span><?=$block->escapeHtml(__('No records.')); ?></span></div>
 <?php endif ?>

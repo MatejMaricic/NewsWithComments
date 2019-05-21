@@ -11,7 +11,6 @@ class CommentsDataProvider extends AbstractDataProvider
      */
     private $customerRepositoryInterface;
 
-
     /**
      * @param string                                                                  $name
      * @param string                                                                  $primaryFieldName

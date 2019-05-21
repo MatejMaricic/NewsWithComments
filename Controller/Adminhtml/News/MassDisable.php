@@ -5,7 +5,7 @@ namespace Inchoo\NewsWithComments\Controller\Adminhtml\News;
 use Inchoo\NewsWithComments\Api\Data\NewsInterface;
 use Magento\Backend\App\Action;
 
-class massDisable extends Action
+class MassDisable extends Action
 {
     /**
      * @var \Inchoo\NewsWithComments\Api\NewsRepositoryInterface

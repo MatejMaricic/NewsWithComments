@@ -17,33 +17,35 @@
         </p>
         <hr>
 
-        <?php if ($block->isEnabled()): ?>
+        <?php if ($block->isEnabled()) : ?>
 
-            <h2><?=__('Comments')?></h2>
+            <h2><?=$block->escapeHtml(__('Comments'))?></h2>
 
-            <?php foreach ($news->getComments() as $comment): ?>
+            <?php foreach ($news->getComments() as $comment) : ?>
                 <div>
                    <h4>
-                       <?= $block->escapeHtml($comment->getContent()); ?>
+                        <?= $block->escapeHtml($comment->getContent()); ?>
                    </h4>
                     <p>
-                        By <?= $block->escapeHtml($comment->getAuthor()) . ' at ' . $block->escapeHtml($comment->getAddedAt()); ?>
+                        By <?= $block->escapeHtml($comment->getAuthor()) . ' at ' .
+                        $block->escapeHtml($comment->getAddedAt()); ?>
                     </p>
                 </div>
 
-
             <?php endforeach; ?>
             <hr>
-            <?php if ($block->isLoggedIn()): ?>
+            <?php if ($block->isLoggedIn()) : ?>
 
                 <form action="<?= $block->getSaveAction() ?>" method="post" data-mage-init='{"validation":{}}'>
                     <input name="news_id" type="hidden" value="<?= $news->getId() ?>">
-                    <textarea name="comment_content" type="text" data-validate='{"required":true}' style="width: 400px;"></textarea>
+                    <textarea name="comment_content" type="text"
+                              data-validate='{"required":true}' style="width: 400px;">
+                    </textarea>
                     <br>
                     <input type="submit" value="Comment">
                 </form>
 
-            <?php else: ?>
+            <?php else : ?>
 
                 <h2>You must be <a href="<?= $block->getLoginUrl(); ?>">logged in</a> to comment</h2>
 

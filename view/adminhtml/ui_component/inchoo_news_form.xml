@@ -48,6 +48,9 @@
 
 
     <fieldset name="general">
+        <settings>
+            <label>Form</label>
+        </settings>
         <hidden name="news_id" sortOrder="1">
             <settings>
                 <dataScope>news_id</dataScope>

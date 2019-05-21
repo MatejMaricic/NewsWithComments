@@ -5,7 +5,7 @@ namespace Inchoo\NewsWithComments\Controller\Adminhtml\Comments;
 use Inchoo\NewsWithComments\Api\Data\CommentsInterface;
 use Magento\Backend\App\Action;
 
-class massDisable extends Action
+class MassDelete extends Action
 {
     /**
      * @var \Inchoo\NewsWithComments\Api\CommentsRepositoryInterface
@@ -25,11 +25,11 @@ class massDisable extends Action
         $this->commentsRepository = $commentsRepository;
         $this->commentsCollectionFactory = $commentsCollectionFactory;
     }
+
     protected function _isAllowed()
     {
         return $this->_authorization->isAllowed(CommentsInterface::ADMIN_RESOURCE);
     }
-
 
     public function execute()
     {
@@ -40,14 +40,13 @@ class massDisable extends Action
 
             foreach ($collection as $comment) {
                 try {
-                    $comment->setPublished(false);
-                    $this->commentsRepository->save($comment);
+                    $this->commentsRepository->delete($comment);
                 } catch (\Exception $exception) {
-                    $this->messageManager->addErrorMessage('Could not Disable Comment');
+                    $this->messageManager->addErrorMessage('Could not delete entity');
                     return $this->_redirect('comments/comments');
                 }
             }
-            $this->messageManager->addSuccessMessage('Selected Comments Disabled');
+            $this->messageManager->addSuccessMessage('Selected Comments Deleted');
             return $this->_redirect('comments/comments');
         }
 

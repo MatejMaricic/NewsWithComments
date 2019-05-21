@@ -5,7 +5,7 @@ namespace Inchoo\NewsWithComments\Controller\Adminhtml\Comments;
 use Inchoo\NewsWithComments\Api\Data\CommentsInterface;
 use Magento\Backend\App\Action;
 
-class massPublish extends Action
+class MassPublish extends Action
 {
     /**
      * @var \Inchoo\NewsWithComments\Api\CommentsRepositoryInterface

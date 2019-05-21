@@ -49,7 +49,7 @@ class Save extends Action
         return $this->_authorization->isAllowed(NewsInterface::ADMIN_RESOURCE);
     }
 
-    public function getCurrentUser()
+    protected function getCurrentUser()
     {
         return $this->authSession->getUser()->getId();
     }
