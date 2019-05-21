@@ -43,5 +43,4 @@ interface CommentsRepositoryInterface
     public function getList(SearchCriteriaInterface $searchCriteria);
 
     public function saveComment($comment);
-
 }

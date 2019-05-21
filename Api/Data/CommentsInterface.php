@@ -33,7 +33,6 @@ interface CommentsInterface
      */
     public function getForeignKey();
 
-
     /**
      * Get added by
      *
@@ -95,5 +94,4 @@ interface CommentsInterface
      * @return CommentsInterface
      */
     public function setForeignKey($key);
-
 }

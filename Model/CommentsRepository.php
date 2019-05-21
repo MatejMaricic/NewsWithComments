@@ -50,7 +50,7 @@ class CommentsRepository implements CommentsRepositoryInterface
         \Inchoo\NewsWithComments\Api\Data\CommentsSearchResultsInterfaceFactory $searchResultsFactory,
         CollectionProcessorInterface $collectionProcessor,
         \Magento\Framework\Escaper $_escaper,
-        \Magento\Customer\Model\Session $customerSession
+        \Magento\Customer\Model\Session\Proxy $customerSession
     ) {
         $this->commentsModelFactory = $commentsModelFactory;
         $this->commentsResource = $commentsResource;
@@ -137,10 +137,10 @@ class CommentsRepository implements CommentsRepositoryInterface
         return $searchResults;
     }
 
-
     /**
      * Saves New Comment
-     * @param $data
+     *
+     * @param  $data
      * @return bool|string
      */
     public function saveComment($data)
@@ -152,9 +152,10 @@ class CommentsRepository implements CommentsRepositoryInterface
             $comment->setForeignKey((int)$data[NewsInterface::NEWS_ID]);
 
             $this->commentsResource->save($comment);
+            return true;
         } catch (\Exception $exception) {
-            return $exception->getMessage();
+            $exception->getMessage();
         }
-        return true;
+        return false;
     }
 }

@@ -55,7 +55,7 @@ class SingleNews extends Template
         \Inchoo\NewsWithComments\Api\Data\NewsInterfaceFactory $newsModelFactory,
         SearchCriteriaBuilder $searchCriteriaBuilder,
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
-        \Magento\Customer\Model\Session $session,
+        \Magento\Customer\Model\Session\Proxy $session,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         SortOrderBuilder $sortOrderBuilder,
         \Magento\Framework\App\Response\RedirectInterface $redirect,

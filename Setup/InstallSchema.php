@@ -103,7 +103,6 @@ class InstallSchema implements InstallSchemaInterface
 
         $setup->getConnection()->createTable($comments);
 
-
         $setup->endSetup();
     }
 }

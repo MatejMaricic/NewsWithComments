@@ -48,10 +48,6 @@
 
 
     <fieldset name="general">
-        <settings>
-            <label />
-        </settings>
-
         <hidden name="news_id" sortOrder="1">
             <settings>
                 <dataScope>news_id</dataScope>

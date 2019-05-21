@@ -31,7 +31,6 @@ class massDelete extends Action
         return $this->_authorization->isAllowed(CommentsInterface::ADMIN_RESOURCE);
     }
 
-
     public function execute()
     {
         if ($ids = $this->_request->getParam('selected')) {

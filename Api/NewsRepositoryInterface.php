@@ -43,5 +43,4 @@ interface NewsRepositoryInterface
     public function getList(SearchCriteriaInterface $searchCriteria);
 
     public function updateNews($data);
-
 }
