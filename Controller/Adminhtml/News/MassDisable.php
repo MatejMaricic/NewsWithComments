@@ -38,16 +38,13 @@ class MassDisable extends Action
                 ->create()
                 ->addFieldToFilter('news_id', $ids);
 
-            foreach ($collection as $news) {
-                try {
-                    $news->setPublished(false);
-                    $this->newsRepository->save($news);
-                } catch (\Exception $exception) {
-                    $this->messageManager->addErrorMessage('Could Not Disable Selected News');
-                    return $this->_redirect('news/news');
-                }
+            try {
+                $collection->setDataToAll('published', false)->save();
+            } catch (\Exception $exception) {
+                $this->messageManager->addErrorMessage('Could Not Disable Selected News');
+                return $this->_redirect('news/news');
             }
-            $this->messageManager->addSuccessMessage('Selected News Disabled');
+            $this->messageManager->addSuccessMessage('Selected News Successfully Disabled');
             return $this->_redirect('news/news');
         }
 

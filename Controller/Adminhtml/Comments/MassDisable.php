@@ -37,19 +37,14 @@ class MassDisable extends Action
                 ->create()
                 ->addFieldToFilter('comment_id', $ids);
 
-            foreach ($collection as $comment) {
-                try {
-                    $comment->setPublished(false);
-                    $this->commentsRepository->save($comment);
-                } catch (\Exception $exception) {
-                    $this->messageManager->addErrorMessage('Could not Disable Comment');
-                    return $this->_redirect('comments/comments');
-                }
+            try {
+                $collection->setDataToAll('comments_published', false)->save();
+            } catch (\Exception $exception) {
+                $this->messageManager->addErrorMessage('Could Not Disable Selected Comments');
             }
-            $this->messageManager->addSuccessMessage('Selected Comments Disabled');
+            $this->messageManager->addSuccessMessage('Comments Successfully Disabled');
             return $this->_redirect('comments/comments');
         }
-
         return $this->_redirect('comments/comments');
     }
 }

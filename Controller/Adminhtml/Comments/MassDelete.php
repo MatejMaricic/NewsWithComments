@@ -38,18 +38,15 @@ class MassDelete extends Action
                 ->create()
                 ->addFieldToFilter('comment_id', $ids);
 
-            foreach ($collection as $comment) {
-                try {
-                    $this->commentsRepository->delete($comment);
-                } catch (\Exception $exception) {
-                    $this->messageManager->addErrorMessage('Could not delete entity');
-                    return $this->_redirect('comments/comments');
-                }
+            try {
+                $collection->walk('delete');
+            } catch (\Exception $exception) {
+                $this->messageManager->addErrorMessage('Could Not Delete Selected Comments');
+                return $this->_redirect('comments/comments');
             }
-            $this->messageManager->addSuccessMessage('Selected Comments Deleted');
+            $this->messageManager->addSuccessMessage('Comments Successfully Deleted');
             return $this->_redirect('comments/comments');
         }
-
         return $this->_redirect('comments/comments');
     }
 }

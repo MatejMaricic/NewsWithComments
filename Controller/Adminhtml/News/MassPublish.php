@@ -38,16 +38,13 @@ class MassPublish extends Action
                 ->create()
                 ->addFieldToFilter('news_id', $ids);
 
-            foreach ($collection as $news) {
-                try {
-                    $news->setPublished(true);
-                    $this->newsRepository->save($news);
-                } catch (\Exception $exception) {
-                    $this->messageManager->addErrorMessage('Could Not Publish Selected News');
-                    return $this->_redirect('news/news');
-                }
+            try {
+                $collection->setDataToAll('published', true)->save();
+            } catch (\Exception $exception) {
+                $this->messageManager->addErrorMessage('Could Not Publish Selected News');
+                return $this->_redirect('news/news');
             }
-            $this->messageManager->addSuccessMessage('Selected News Published');
+            $this->messageManager->addSuccessMessage('Selected News Successfully Published');
             return $this->_redirect('news/news');
         }
 

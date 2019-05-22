@@ -37,19 +37,14 @@ class MassPublish extends Action
                 ->create()
                 ->addFieldToFilter('comment_id', $ids);
 
-            foreach ($collection as $comment) {
-                try {
-                    $comment->setPublished(true);
-                    $this->commentsRepository->save($comment);
-                } catch (\Exception $exception) {
-                    $this->messageManager->addErrorMessage('Could not Publish Comment');
-                    return $this->_redirect('comments/comments');
-                }
+            try {
+                $collection->setDataToAll('comments_published', true)->save();
+            } catch (\Exception $exception) {
+                $this->messageManager->addErrorMessage('Could Not Publish Selected Comments');
             }
-            $this->messageManager->addSuccessMessage('Selected Comments Published');
+            $this->messageManager->addSuccessMessage('Comments Successfully Published');
             return $this->_redirect('comments/comments');
         }
-
         return $this->_redirect('comments/comments');
     }
 }

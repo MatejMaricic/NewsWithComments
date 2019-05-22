@@ -8,10 +8,6 @@ use Magento\Framework\Controller\ResultFactory;
 
 class Index extends Action
 {
-    public function __construct(Action\Context $context)
-    {
-        parent::__construct($context);
-    }
 
     protected function _isAllowed()
     {

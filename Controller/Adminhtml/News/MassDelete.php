@@ -38,15 +38,13 @@ class MassDelete extends Action
                 ->create()
                 ->addFieldToFilter('news_id', $ids);
 
-            foreach ($collection as $news) {
-                try {
-                    $this->newsRepository->delete($news);
-                } catch (\Exception $exception) {
-                    $this->messageManager->addErrorMessage('Could Not Delete News');
-                    return $this->_redirect('news/news');
-                }
+            try {
+                $collection->walk('delete');
+            } catch (\Exception $exception) {
+                $this->messageManager->addErrorMessage('Could Not Delete Selected News');
+                return $this->_redirect('news/news');
             }
-            $this->messageManager->addSuccessMessage('Selected News Deleted');
+            $this->messageManager->addSuccessMessage('Selected News Successfully Deleted');
             return $this->_redirect('news/news');
         }
 

@@ -8,11 +8,6 @@ use Magento\Framework\Controller\ResultFactory;
 
 class NewAction extends Action
 {
-    public function __construct(Action\Context $context)
-    {
-        parent::__construct($context);
-    }
-
     protected function _isAllowed()
     {
         return $this->_authorization->isAllowed(NewsInterface::ADMIN_RESOURCE);
@@ -21,7 +16,7 @@ class NewAction extends Action
     public function execute()
     {
         /**
- * @var \Magento\Backend\Model\View\Result\Page $resultPage 
+ * @var \Magento\Backend\Model\View\Result\Page $resultPage
 */
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
         $resultPage->setActiveMenu('Inchoo_NewsWithComments::news');
