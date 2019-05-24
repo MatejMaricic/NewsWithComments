@@ -14,20 +14,27 @@ class NewsDataProvider extends AbstractDataProvider
      * @var \Magento\User\Model\ResourceModel\User
      */
     private $userResource;
+    /**
+     * @var \Inchoo\NewsWithComments\Model\ResourceModel\News\CollectionFactory
+     */
+    private $collectionFactory;
 
     /**
-     * @param string                                                              $name
-     * @param string                                                              $primaryFieldName
-     * @param string                                                              $requestFieldName
+     * @param string $name
+     * @param string $primaryFieldName
+     * @param string $requestFieldName
      * @param \Inchoo\NewsWithComments\Model\ResourceModel\News\CollectionFactory $collectionFactory
-     * @param array                                                               $meta
-     * @param array                                                               $data
+     * @param \Magento\User\Model\UserFactory $userFactory
+     * @param \Magento\User\Model\ResourceModel\User $userResource
+     * @param array $meta
+     * @param array $data
      */
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
         \Inchoo\NewsWithComments\Model\ResourceModel\News\CollectionFactory $collectionFactory,
+        \Inchoo\NewsWithComments\Model\ResourceModel\News\Collection $collection,
         \Magento\User\Model\UserFactory $userFactory,
         \Magento\User\Model\ResourceModel\User $userResource,
         array $meta = [],
@@ -35,9 +42,10 @@ class NewsDataProvider extends AbstractDataProvider
     ) {
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
 
-        $this->collection = $collectionFactory->create();
         $this->userFactory = $userFactory;
         $this->userResource = $userResource;
+        $this->collectionFactory = $collectionFactory;
+        $this->collection = $collection;
     }
 
     public function getAdminName($id)
@@ -54,6 +62,7 @@ class NewsDataProvider extends AbstractDataProvider
      */
     public function getData()
     {
+        $this->collection = $this->collectionFactory->create();
         $data = $this->getCollection()->toArray();
 
         foreach ($data['items'] as $item => $value) {

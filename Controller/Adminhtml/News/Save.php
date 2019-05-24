@@ -28,12 +28,12 @@ class Save extends Action
 
     public function __construct(
         Action\Context $context,
-        \Magento\Framework\App\Request\Http $request,
+        \Magento\Framework\App\Request\Http\Proxy $request,
         \Inchoo\NewsWithComments\Api\NewsRepositoryInterface $newsRepository,
         \Inchoo\NewsWithComments\Api\Data\NewsInterfaceFactory $newsModelFactory,
         \Magento\Framework\Message\ManagerInterface $messageManager,
         \Magento\Framework\Escaper $_escaper,
-        \Magento\Backend\Model\Auth\Session $authSession
+        \Magento\Backend\Model\Auth\Session\Proxy $authSession
     ) {
         $this->_request = $request;
         parent::__construct($context);

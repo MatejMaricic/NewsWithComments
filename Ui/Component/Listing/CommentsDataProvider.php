@@ -10,28 +10,36 @@ class CommentsDataProvider extends AbstractDataProvider
      * @var \Magento\Customer\Api\CustomerRepositoryInterface
      */
     private $customerRepositoryInterface;
+    /**
+     * @var \Inchoo\NewsWithComments\Model\ResourceModel\Comments\CollectionFactory
+     */
+    private $collectionFactory;
 
     /**
-     * @param string                                                                  $name
-     * @param string                                                                  $primaryFieldName
-     * @param string                                                                  $requestFieldName
+     * @param string $name
+     * @param string $primaryFieldName
+     * @param string $requestFieldName
      * @param \Inchoo\NewsWithComments\Model\ResourceModel\Comments\CollectionFactory $collectionFactory
-     * @param array                                                                   $meta
-     * @param array                                                                   $data
+     * @param \Inchoo\NewsWithComments\Model\ResourceModel\Comments\Collection $collection
+     * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepositoryInterface
+     * @param array $meta
+     * @param array $data
      */
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
         \Inchoo\NewsWithComments\Model\ResourceModel\Comments\CollectionFactory $collectionFactory,
+        \Inchoo\NewsWithComments\Model\ResourceModel\Comments\Collection $collection,
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepositoryInterface,
         array $meta = [],
         array $data = []
     ) {
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
 
-        $this->collection = $collectionFactory->create();
+        $this->collectionFactory = $collectionFactory;
         $this->customerRepositoryInterface = $customerRepositoryInterface;
+        $this->collection = $collection;
     }
 
     public function getCustomerName($id)
@@ -47,6 +55,7 @@ class CommentsDataProvider extends AbstractDataProvider
      */
     public function getData()
     {
+        $this->collection = $this->collectionFactory->create();
         $data = $this->getCollection()->toArray();
 
         foreach ($data['items'] as $item => $value) {

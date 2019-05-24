@@ -33,7 +33,7 @@ class Save extends Action
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         \Inchoo\NewsWithComments\Api\Data\CommentsInterfaceFactory $commentsInterfaceFactory,
         \Inchoo\NewsWithComments\Api\CommentsRepositoryInterface $commentsRepository,
-        \Magento\Framework\App\Request\Http $request,
+        \Magento\Framework\App\Request\Http\Proxy $request,
         \Magento\Customer\Model\Session\Proxy $session
     ) {
         parent::__construct($context);

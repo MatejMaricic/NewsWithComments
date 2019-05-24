@@ -3,7 +3,7 @@
 
     <body>
     <referenceContainer name="content.top">
-        <block class="Inchoo\NewsWithComments\Block\News" name="news_block" template="Inchoo_NewsWithComments::news.phtml"/>
+        <block  template="Inchoo_NewsWithComments::news-wrapper.phtml"/>
     </referenceContainer>
     </body>
 </page>
